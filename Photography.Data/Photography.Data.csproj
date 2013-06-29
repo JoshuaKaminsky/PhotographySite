@@ -30,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,11 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDbContext.cs" />
+    <Compile Include="Bolts\BaseUnitOfWork.cs" />
+    <Compile Include="Bolts\EFRepository.cs" />
+    <Compile Include="Bolts\RepositoryProvider.cs" />
     <Compile Include="Bolts\UserProcess.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\IRepositoryProvider.cs" />
+    <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\SessionEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryFactories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Photography.Core\Photography.Core.csproj">
@@ -51,6 +64,7 @@
       <Name>Photography.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
