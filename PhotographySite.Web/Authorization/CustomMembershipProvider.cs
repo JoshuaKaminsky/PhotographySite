@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Photography.Core.Contracts;
+using Photography.Core.Contracts.Service;
 using WebMatrix.WebData;
 
 namespace PhotographySite.Authorization

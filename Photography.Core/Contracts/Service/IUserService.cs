@@ -1,6 +1,6 @@
 ﻿using Photography.Core.Models;
 
-namespace Photography.Core.Contracts
+namespace Photography.Core.Contracts.Service
 {
     public interface IUserService
     {

@@ -39,7 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Contracts\Process\IUserProcess.cs" />
+    <Compile Include="Contracts\Service\IUserService.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\User.cs" />
