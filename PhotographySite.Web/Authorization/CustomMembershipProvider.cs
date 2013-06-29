@@ -1,8 +1,8 @@
-﻿using PhotographySite.Core.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Photography.Core.Contracts;
 using WebMatrix.WebData;
 
 namespace PhotographySite.Authorization

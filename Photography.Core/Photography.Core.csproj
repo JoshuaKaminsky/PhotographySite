@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Session.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

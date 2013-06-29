@@ -1,20 +1,25 @@
-﻿using PhotographySite.Core.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Photography.Core.Contracts;
 
 namespace Photography.Service
 {
     public class UserService : IUserService
     {
+        public UserService()
+        {
+
+        }
+
         public Core.Models.User CreateUser(string username, string password, string emailAddress)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteUser(int ID)
+        public bool DeleteUser(int Id)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +29,7 @@ namespace Photography.Service
             throw new NotImplementedException();
         }
 
-        public bool UpdatePassword(int ID, string oldPassword, string newPassword)
+        public bool UpdatePassword(int Id, string oldPassword, string newPassword)
         {
             throw new NotImplementedException();
         }

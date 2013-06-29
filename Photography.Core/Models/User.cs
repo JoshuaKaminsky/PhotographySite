@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Photography.Core.Models
+﻿namespace Photography.Core.Models
 {
     public class User
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Username { get; set; }
 
