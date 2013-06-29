@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bolts\RoleProcess.cs" />
+    <Compile Include="Bolts\SessionProcess.cs" />
     <Compile Include="Bolts\UserProcess.cs" />
     <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\SessionEntity.cs" />
