@@ -8,7 +8,7 @@ using Photography.Core.Contracts.Service;
 
 namespace Photography.Service
 {
-    public class UserService : IUserService
+    internal class UserService : IUserService
     {
         public UserService()
         {
