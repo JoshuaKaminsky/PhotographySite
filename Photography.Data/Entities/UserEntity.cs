@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Photography.Data.Entities
+﻿namespace Photography.Data.Entities
 {
-    internal class UserEntity
+    internal class UserEntity : BaseEntity
     {
-        public int Id { get; set; }
-
         public string EmailAddress { get; set; }
 
         public string Name { get; set; }

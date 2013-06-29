@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Photography.Core.Contracts;
 using Photography.Core.Contracts.Service;
 
 namespace Photography.Service
