@@ -7,6 +7,6 @@ namespace Photography.Core.Contracts.Process
     {
         Session CreateSession(int userId);
 
-        bool ValidateSession(int userId, Guid sessionKey);
+        Session GetSession(int userId, Guid sessionKey);
     }
 }

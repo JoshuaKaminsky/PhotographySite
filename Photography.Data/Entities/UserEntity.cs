@@ -9,6 +9,8 @@ namespace Photography.Data.Entities
 
         public string Salt { get; set; }
 
+        public decimal Discount { get; set; }
+       
         public virtual ICollection<RoleEntity> Roles { get; set; }
     }
 }
