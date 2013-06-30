@@ -55,6 +55,7 @@
     <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\SessionEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="Extensions\ModelTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryFactories.cs" />
   </ItemGroup>

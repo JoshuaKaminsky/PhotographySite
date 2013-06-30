@@ -8,6 +8,8 @@ namespace Photography.Data.Entities
 
         public int UserId { get; set; }
 
+        public UserEntity User { get; set; }
+
         public DateTime CreatedOn { get; set; }
     }
 }
