@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bolts\RoleProcess.cs" />
+    <Compile Include="Bolts\SessionProcess.cs" />
     <Compile Include="BaseDbContext.cs" />
     <Compile Include="Bolts\BaseUnitOfWork.cs" />
     <Compile Include="Bolts\EFRepository.cs" />
