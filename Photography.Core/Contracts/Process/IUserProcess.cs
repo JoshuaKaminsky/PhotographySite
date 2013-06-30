@@ -6,10 +6,10 @@ namespace Photography.Core.Contracts.Process
     {
         User CreateUser(string emailAddress, string password);
 
-        bool DeleteUser(int Id);
+        bool DeleteUser(int id);
 
         User UpdateUser(User user);
 
-        bool UpdatePassword(int Id, string oldPassword, string newPassword);
+        bool UpdatePassword(int id, string oldPassword, string newPassword);
     }
 }
