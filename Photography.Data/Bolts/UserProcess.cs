@@ -1,19 +1,16 @@
 ﻿using System.Data;
-using System.Security.Authentication;
 using System.Security.Cryptography;
 using Photography.Core.Contracts.Process;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Photography.Core.Models;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
+using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {
-    public class UserProcess : IUserProcess
+    internal class UserProcess : IUserProcess
     {
         private static readonly RNGCryptoServiceProvider RngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
@@ -138,7 +135,7 @@ namespace Photography.Data.Bolts
             throw new NotImplementedException();
         }
 
-        internal static string GetPasswordHash(string password, int salt)
+        internal static string GetPasswordHash(string password, string salt)
         {
             return Encoding.UTF8.GetString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password + salt)));
         }
