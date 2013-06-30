@@ -8,19 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Photography.Core.Models;
+using Photography.Data.Contracts;
+using Photography.Data.Entities;
 
 namespace Photography.Data.Bolts
 {
     public class UserProcess : IUserProcess
     {
-        // private static readonly RNGCryptoServiceProvider RngCryptoServiceProvider = new RNGCryptoServiceProvider();
+        private static readonly RNGCryptoServiceProvider RngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
-        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        //public UserProcess(IUnitOfWork unitOfWork)
-        //{
-        //    _unitOfWork = unitOfWork;
-        //}
+        public UserProcess(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         //public User GetUser(string userName, string password)
         //{
@@ -96,22 +98,29 @@ namespace Photography.Data.Bolts
         //    return true;
         //}
 
-        //internal static string GetPasswordHash(string password, int salt)
-        //{
-        //    return Encoding.UTF8.GetString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password + salt)));
-        //}
-
-        //internal static int CreateSalt()
-        //{
-        //    var data = new byte[4];
-
-        //    RngCryptoServiceProvider.GetBytes(data);
-
-        //    return BitConverter.ToInt32(data, 0);
-        //}
-        public User CreateUser(string username, string password, string emailAddress)
+        public User CreateUser(string emailAddress, string password)
         {
-            throw new NotImplementedException();
+            var oldUser = _unitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
+            if (oldUser != null)
+                throw new DataException("Email address already exists.");
+            var assessorRole = _unitOfWork.Roles.Get(role => role.Name.Equals("guest", StringComparison.InvariantCultureIgnoreCase));
+
+            var salt = CreateSalt();
+            var passwordHash = GetPasswordHash(password, salt);
+
+            var newUser = new UserEntity
+            {
+                Password = passwordHash,
+                Salt = salt,
+                EmailAddress = emailAddress
+            };
+
+            newUser.Roles.Add(assessorRole);
+
+            newUser = _unitOfWork.Users.Add(newUser);
+            _unitOfWork.Commit();
+
+            return newUser.ToModel();
         }
 
         public bool DeleteUser(int Id)
@@ -128,5 +137,20 @@ namespace Photography.Data.Bolts
         {
             throw new NotImplementedException();
         }
+
+        internal static string GetPasswordHash(string password, int salt)
+        {
+            return Encoding.UTF8.GetString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password + salt)));
+        }
+
+        internal static string CreateSalt()
+        {
+            var data = new byte[4];
+
+            RngCryptoServiceProvider.GetBytes(data);
+
+            return BitConverter.ToInt32(data, 0).ToString();
+        }
+
     }
 }
