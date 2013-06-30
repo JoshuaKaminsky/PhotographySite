@@ -138,7 +138,7 @@ namespace Photography.Data.Bolts
             throw new NotImplementedException();
         }
 
-        internal static string GetPasswordHash(string password, int salt)
+        internal static string GetPasswordHash(string password, string salt)
         {
             return Encoding.UTF8.GetString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password + salt)));
         }
