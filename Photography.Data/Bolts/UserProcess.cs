@@ -1,4 +1,7 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Security.Authentication;
 using System.Security.Cryptography;
 using Photography.Core.Contracts.Process;
 using System;
@@ -21,79 +24,32 @@ namespace Photography.Data.Bolts
             _unitOfWork = unitOfWork;
         }
 
-        //public User GetUser(string userName, string password)
-        //{
-        //    var user = _unitOfWork.Users.Get(u => u.UserName.Equals(userName), new List<string> { "Roles" });
-        //    if (user == null)
-        //        throw new AuthenticationException("Invalid Username.");
+        public User GetUser(string emailAddress, string password)
+        {
+            var user = _unitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new List<string> { "Roles" });
+            if (user == null)
+                throw new AuthenticationException("Invalid Username.");
 
-        //    if (!GetPasswordHash(password, user.PasswordSalt).Equals(user.PasswordHash))
-        //        throw new AuthenticationException("Invalid Password.");
+            if (!IsPasswordValid(password, user.Salt, user.Password))
+                throw new AuthenticationException("Invalid Password.");
 
-        //    return user.ToModel();
-        //}
+            return user.ToModel();
+        }
 
-        //public User GetUserById(int userId)
-        //{
-        //    try
-        //    {
-        //        return _unitOfWork.Users.GetById(userId).ToModel();
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Trace.TraceError("Could not retrieve user by id with id {0}. {1}", userId, exception.Message);
-        //        Trace.TraceError(exception.ToString());
+        public User GetUserById(int userId)
+        {
+            try
+            {
+                return _unitOfWork.Users.GetById(userId).ToModel();
+            }
+            catch (Exception exception)
+            {
+                Trace.TraceError("Could not retrieve user by id with id {0}. {1}", userId, exception.Message);
+                Trace.TraceError(exception.ToString());
 
-        //        return null;
-        //    }
-        //}
-
-        //public User CreateUser(string userName, string password, string firstName, string lastName)
-        //{
-        //    var oldUser = _unitOfWork.Users.Get(user => user.UserName.Equals(userName));
-        //    if (oldUser != null)
-        //        throw new DataException("Username already exists.");
-
-        //    var assessorRole = _unitOfWork.Roles.Get(role => role.Name.Equals("guest", StringComparison.InvariantCultureIgnoreCase));
-
-        //    var salt = CreateSalt();
-        //    var passwordHash = GetPasswordHash(password, salt);
-
-        //    var newUser = new Entity.User()
-        //    {
-        //        IsActive = true,
-        //        PasswordHash = passwordHash,
-        //        PasswordSalt = salt,
-        //        UserName = userName,
-        //        FirstName = firstName,
-        //        LastName = lastName
-        //    };
-
-        //    newUser.Roles.Add(assessorRole);
-
-        //    newUser = _unitOfWork.Users.Add(newUser);
-        //    _unitOfWork.Commit();
-
-        //    return newUser.ToModel();
-        //}
-
-        //public bool ChangePassword(int userId, string newPassword)
-        //{
-        //    var user = _unitOfWork.Users.GetById(userId);
-        //    if (user == null)
-        //        throw new DataException(string.Format("User with id {0} does not exist.", userId));
-
-        //    var salt = CreateSalt();
-        //    var passwordHash = GetPasswordHash(newPassword, salt);
-
-        //    user.PasswordSalt = salt;
-        //    user.PasswordHash = passwordHash;
-
-        //    _unitOfWork.Users.Update(user);
-        //    _unitOfWork.Commit();
-
-        //    return true;
-        //}
+                return null;
+            }
+        }
 
         public User CreateUser(string emailAddress, string password)
         {
@@ -120,9 +76,13 @@ namespace Photography.Data.Bolts
             return newUser.ToModel();
         }
 
-        public bool DeleteUser(int Id)
+        public bool DeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            var user = _unitOfWork.Users.GetById(userId);
+            if (user == null)
+                return true;
+
+            return _unitOfWork.Users.Delete(userId);
         }
 
         public User UpdateUser(User user)
@@ -130,9 +90,29 @@ namespace Photography.Data.Bolts
             throw new NotImplementedException();
         }
 
-        public bool UpdatePassword(int Id, string oldPassword, string newPassword)
+        public bool UpdatePassword(int userId, string oldPassword, string newPassword)
         {
-            throw new NotImplementedException();
+            var user = _unitOfWork.Users.GetById(userId);
+            if (user == null)
+                throw new DataException(String.Format("User with Id {0} does not exist", userId));
+
+            if (!IsPasswordValid(oldPassword, user.Salt, user.Password))
+                throw new DataException("Could not update password; Invalid old password");
+
+            user.Salt = CreateSalt();
+            user.Password = GetPasswordHash(newPassword, user.Salt);
+
+            _unitOfWork.Users.Update(user);
+            _unitOfWork.Commit();
+
+            return true;
+        }
+
+        private bool IsPasswordValid(string password, string salt, string hash)
+        {
+            var passwordHash = GetPasswordHash(password, salt);
+
+            return passwordHash.Equals(hash);
         }
 
         internal static string GetPasswordHash(string password, string salt)

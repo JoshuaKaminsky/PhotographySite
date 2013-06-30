@@ -14,7 +14,7 @@ namespace Photography.Data.Bolts
             throw new NotImplementedException();
         }
 
-        public bool ValidateSession(int userId, Guid sessionKey)
+        public Core.Models.Session GetSession(int userId, Guid sessionKey)
         {
             throw new NotImplementedException();
         }
