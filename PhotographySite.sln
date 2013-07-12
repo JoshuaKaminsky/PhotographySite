@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotographySite.Web", "PhotographySite.Web\PhotographySite.Web.csproj", "{1E609337-DD23-4A2D-BADA-22FAB1933765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotographySite.Web.Tests", "PhotographySite.Web.Tests\PhotographySite.Web.Tests.csproj", "{AC94D2BB-608E-43A4-A274-373D5B73DA97}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotographySite.Web.Test", "PhotographySite.Web.Test\PhotographySite.Web.Test.csproj", "{AC94D2BB-608E-43A4-A274-373D5B73DA97}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A4821409-A567-41B5-9423-9CF073D5F4AF}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photography.Service", "Photography.Service\Photography.Service.csproj", "{99C8AA71-2B27-4AC9-9A43-15F2AA9185ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photography.Data", "Photography.Data\Photography.Data.csproj", "{92300636-9077-40CA-937C-35BB217BD940}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8CA3FE91-4F75-46D2-B4C6-8E2F9775D744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotographySite.Service.Test", "PhotographySite.Service.Test\PhotographySite.Service.Test.csproj", "{C336FAAE-A488-448A-8612-74F9B65356C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotographySite.Data.Test", "PhotographySite.Data.Test\PhotographySite.Data.Test.csproj", "{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,8 +50,21 @@ Global
 		{92300636-9077-40CA-937C-35BB217BD940}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92300636-9077-40CA-937C-35BB217BD940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92300636-9077-40CA-937C-35BB217BD940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C336FAAE-A488-448A-8612-74F9B65356C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C336FAAE-A488-448A-8612-74F9B65356C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C336FAAE-A488-448A-8612-74F9B65356C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C336FAAE-A488-448A-8612-74F9B65356C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC94D2BB-608E-43A4-A274-373D5B73DA97} = {8CA3FE91-4F75-46D2-B4C6-8E2F9775D744}
+		{C336FAAE-A488-448A-8612-74F9B65356C6} = {8CA3FE91-4F75-46D2-B4C6-8E2F9775D744}
+		{7A5A6BAC-6AE3-4A75-B7B2-F4F066E480A6} = {8CA3FE91-4F75-46D2-B4C6-8E2F9775D744}
 	EndGlobalSection
 EndGlobal

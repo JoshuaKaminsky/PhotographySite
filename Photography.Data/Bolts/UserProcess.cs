@@ -108,7 +108,7 @@ namespace Photography.Data.Bolts
             return true;
         }
 
-        private bool IsPasswordValid(string password, string salt, string hash)
+        private static bool IsPasswordValid(string password, string salt, string hash)
         {
             var passwordHash = GetPasswordHash(password, salt);
 

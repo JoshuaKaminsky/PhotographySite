@@ -9,8 +9,8 @@
     <ProjectGuid>{AC94D2BB-608E-43A4-A274-373D5B73DA97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PhotographySite.Web.Tests</RootNamespace>
-    <AssemblyName>PhotographySite.Web.Tests</AssemblyName>
+    <RootNamespace>PhotographySite.Web.Test</RootNamespace>
+    <AssemblyName>PhotographySite.Web.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
