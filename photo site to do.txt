@@ -1,0 +1,5 @@
+think about a dependency injection i want to use
+
+finish data methods - session and role implementations
+
+download git hub

@@ -3,6 +3,11 @@ namespace Photography.Data.Entities
 {
     internal class UserEntity : BaseEntity
     {
+        public UserEntity()
+        {
+            Roles = new List<RoleEntity>();
+        }
+
         public string EmailAddress { get; set; }
 
         public string Password { get; set; }

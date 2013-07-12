@@ -1,0 +1,20 @@
+Pages:
+- Home
+- About
+- Pricing
+- Samples
+??
+
+Functionality:
+Administrator
+- Create user accounts, set expiration date? set password?
+- Manage discount groups, apply discounts to users
+- Upload pictures, associate to user account
+- Choose pics from albums to display on Samples page
+
+Users:
+- log in
+- order pictures - by size, quantity, other options?... payment
+
+General:
+- display watermark over images? prevent right clicking
