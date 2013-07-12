@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Photography.Data.Bolts
 {
-    public class RoleProcess : IRoleProcess
+    internal class RoleProcess : IRoleProcess
     {
         private readonly IUnitOfWork _unitOfWork;
 

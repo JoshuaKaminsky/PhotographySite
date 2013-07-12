@@ -3,3 +3,12 @@ think about a dependency injection i want to use
 finish data methods - session and role implementations
 
 download git hub
+
+
+entity - data model, what we pull out of the database
+repository - interface to database, like select, update, create, etc
+unit of work = what we use to do db transactions
+process = what we use to make these calls to the db, userprocess contains a unit of work that uses the user entity
+newSession = _unitOfWork.Sessions.Add(newSession);
+^  unit of work has all of your tables, it's saying add a new session to that table, it does all the sql magic, that's the entity framework / orm magic
+- some core models will be extended to use for the view, like if you had an extra checkbox or something
