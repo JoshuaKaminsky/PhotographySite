@@ -3,33 +3,36 @@ using Photography.Core.Contracts.Service;
 
 namespace Photography.Service.Bolts
 {
-    internal class UserService : IUserService
+    internal class UserService : BaseService<IUserProcess>, IUserService
     {
-        private readonly IUserProcess _userProcess;
-
-        public UserService(IUserProcess userProcess)
+        public UserService(IUserProcess process)
+            : base(process)
         {
-            _userProcess = userProcess;
         }
 
         public Core.Models.User CreateUser(string emailAddress, string password)
         {
-            return _userProcess.CreateUser(emailAddress, password);
+            return Process.CreateUser(emailAddress, password);
         }
 
         public bool DeleteUser(int userId)
         {
-            return _userProcess.DeleteUser(userId);
+            return Process.DeleteUser(userId);
         }
 
         public Core.Models.User UpdateUser(Core.Models.User user)
         {
-            return _userProcess.UpdateUser(user);
+            return Process.UpdateUser(user);
         }
 
         public bool UpdatePassword(int userId, string oldPassword, string newPassword)
         {
-            return _userProcess.UpdatePassword(userId, oldPassword, newPassword);
+            return Process.UpdatePassword(userId, oldPassword, newPassword);
+        }
+
+        public string ResetPassword(int userId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

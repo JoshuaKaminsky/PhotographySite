@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bolts\BaseService.cs" />
     <Compile Include="Bolts\RoleService.cs" />
     <Compile Include="Bolts\SessionService.cs" />
     <Compile Include="Bolts\UserService.cs" />

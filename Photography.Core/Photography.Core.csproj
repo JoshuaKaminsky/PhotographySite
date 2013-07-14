@@ -39,10 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Process\IProcess.cs" />
     <Compile Include="Contracts\Process\IRoleProcess.cs" />
     <Compile Include="Contracts\Process\ISessionProcess.cs" />
     <Compile Include="Contracts\Process\IUserProcess.cs" />
     <Compile Include="Contracts\Service\IRoleService.cs" />
+    <Compile Include="Contracts\Service\IService.cs" />
     <Compile Include="Contracts\Service\ISessionService.cs" />
     <Compile Include="Contracts\Service\IUserService.cs" />
     <Compile Include="Models\Role.cs" />

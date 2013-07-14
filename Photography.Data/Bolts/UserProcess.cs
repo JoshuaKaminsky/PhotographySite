@@ -13,20 +13,19 @@ using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {
-    internal class UserProcess : IUserProcess
+    internal class UserProcess : BaseProcess, IUserProcess
     {
         private static readonly RNGCryptoServiceProvider RngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
-        private readonly IUnitOfWork _unitOfWork;
 
         public UserProcess(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
         }
 
         public User GetUser(string emailAddress, string password)
         {
-            var user = _unitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new List<string> { "Roles" });
+            var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new List<string> { "Roles" });
             if (user == null)
                 throw new AuthenticationException("Invalid Username.");
 
@@ -40,7 +39,7 @@ namespace Photography.Data.Bolts
         {
             try
             {
-                return _unitOfWork.Users.GetById(userId).ToModel();
+                return UnitOfWork.Users.GetById(userId).ToModel();
             }
             catch (Exception exception)
             {
@@ -53,10 +52,10 @@ namespace Photography.Data.Bolts
 
         public User CreateUser(string emailAddress, string password)
         {
-            var oldUser = _unitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
+            var oldUser = UnitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
             if (oldUser != null)
                 throw new DataException("Email address already exists.");
-            var assessorRole = _unitOfWork.Roles.Get(role => role.Name.Equals("guest", StringComparison.InvariantCultureIgnoreCase));
+            var assessorRole = UnitOfWork.Roles.Get(role => role.Name.Equals("guest", StringComparison.InvariantCultureIgnoreCase));
 
             var salt = CreateSalt();
             var passwordHash = GetPasswordHash(password, salt);
@@ -70,19 +69,15 @@ namespace Photography.Data.Bolts
 
             newUser.Roles.Add(assessorRole);
 
-            newUser = _unitOfWork.Users.Add(newUser);
-            _unitOfWork.Commit();
+            newUser = UnitOfWork.Users.Add(newUser);
+            UnitOfWork.Commit();
 
             return newUser.ToModel();
         }
 
         public bool DeleteUser(int userId)
         {
-            var user = _unitOfWork.Users.GetById(userId);
-            if (user == null)
-                return true;
-
-            return _unitOfWork.Users.Delete(userId);
+            return UnitOfWork.Users.GetById(userId) == null || UnitOfWork.Users.Delete(userId);
         }
 
         public User UpdateUser(User user)
@@ -92,7 +87,7 @@ namespace Photography.Data.Bolts
 
         public bool UpdatePassword(int userId, string oldPassword, string newPassword)
         {
-            var user = _unitOfWork.Users.GetById(userId);
+            var user = UnitOfWork.Users.GetById(userId);
             if (user == null)
                 throw new DataException(String.Format("User with Id {0} does not exist", userId));
 
@@ -102,8 +97,8 @@ namespace Photography.Data.Bolts
             user.Salt = CreateSalt();
             user.Password = GetPasswordHash(newPassword, user.Salt);
 
-            _unitOfWork.Users.Update(user);
-            _unitOfWork.Commit();
+            UnitOfWork.Users.Update(user);
+            UnitOfWork.Commit();
 
             return true;
         }

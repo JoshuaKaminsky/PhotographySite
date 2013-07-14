@@ -2,7 +2,7 @@
 
 namespace Photography.Core.Contracts.Process
 {
-    public interface IUserProcess
+    public interface IUserProcess : IProcess
     {
         User GetUser(string emailAddress, string password);
 
