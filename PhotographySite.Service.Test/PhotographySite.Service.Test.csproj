@@ -51,6 +51,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Photography.Core\Photography.Core.csproj">
+      <Project>{D21E6A9B-1193-4553-A692-A69A8A13C263}</Project>
+      <Name>Photography.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Photography.Service\Photography.Service.csproj">
+      <Project>{99C8AA71-2B27-4AC9-9A43-15F2AA9185ED}</Project>
+      <Name>Photography.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
