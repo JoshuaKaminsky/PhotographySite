@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Photography.Data.Entities
 {
+    [Table("User")]
     internal class UserEntity : BaseEntity
     {
         public UserEntity()

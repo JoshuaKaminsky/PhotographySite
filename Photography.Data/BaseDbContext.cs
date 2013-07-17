@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Photography.Core.Models;
+using Photography.Data.Entities;
 
 namespace Photography.Data
 {
@@ -11,11 +11,11 @@ namespace Photography.Data
         {
         }
 
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
 
-        public DbSet<Session> Sessions { get; set; }
+        public DbSet<SessionEntity> Sessions { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
 
         static BaseDbContext()
         {
