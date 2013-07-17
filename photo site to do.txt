@@ -1,9 +1,11 @@
+6/29:
 think about a dependency injection i want to use
-
 finish data methods - session and role implementations
+x download git hub
 
-download git hub
-
+7/12:
+x make tables based off of entities for next week
+	- user, userrole, role, session, usersession (userid, sessionid)
 
 entity - data model, what we pull out of the database
 repository - interface to database, like select, update, create, etc
@@ -13,5 +15,3 @@ newSession = _unitOfWork.Sessions.Add(newSession);
 ^  unit of work has all of your tables, it's saying add a new session to that table, it does all the sql magic, that's the entity framework / orm magic
 - some core models will be extended to use for the view, like if you had an extra checkbox or something
 
-make tables based off of entities for next week
-- user, userrole, role, session, usersession (userid, sessionid)
