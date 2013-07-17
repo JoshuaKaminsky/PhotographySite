@@ -9,10 +9,15 @@ namespace PhotographySite.Data.Test
     public class DataTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void UserProcessCreateShouldCreateUser()
         {
             var userProcess = new UserProcess(new BaseUnitOfWork(new RepositoryProvider(new RepositoryFactories())));
+            
             var user = userProcess.CreateUser("Josh Kaminsky", "JoshKaminsky@gmail.com", "p");
+
+            user.Discount = 95;
+
+            userProcess.UpdateUser(user);
         }
     }
 }

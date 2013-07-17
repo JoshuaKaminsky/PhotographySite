@@ -83,7 +83,7 @@ namespace Photography.Data.Bolts
 
         public User UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            return UnitOfWork.Users.Update(user.ToDataModel()).ToModel();
         }
 
         public bool UpdatePassword(int userId, string oldPassword, string newPassword)
