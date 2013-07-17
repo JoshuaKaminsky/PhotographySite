@@ -1,28 +1,24 @@
-﻿using Photography.Core.Contracts.Process;
+﻿using System.Linq;
+using Photography.Core.Contracts.Process;
 using Photography.Data.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Photography.Data.Bolts
 {
-    internal class RoleProcess : IRoleProcess
+    internal class RoleProcess : BaseProcess, IRoleProcess
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public RoleProcess(IUnitOfWork unitOfWork)
+        public RoleProcess(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
         }
 
         public bool IsInRole(int userId, string roleName)
         {
             try
             {
-                var userEntity = _unitOfWork.Users.Get(user => user.Id == userId, new List<string> { "Roles" });
+                var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, new List<string> { "Roles" });
                 if (userEntity == null)
                     throw new Exception(string.Format("Could not find user with {0}.", userId));
 

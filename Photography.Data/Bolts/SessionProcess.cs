@@ -1,24 +1,17 @@
 ﻿using Photography.Core.Contracts.Process;
-using Photography.Core.Models;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {
-    internal class SessionProcess : ISessionProcess
+    internal class SessionProcess : BaseProcess, ISessionProcess
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SessionProcess(IUnitOfWork unitOfWork)
+        public SessionProcess(IUnitOfWork unitOfWork) 
+            : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
         }
 
         public Core.Models.Session CreateSession(int userId)
@@ -32,8 +25,8 @@ namespace Photography.Data.Bolts
                     SessionKey = Guid.NewGuid()
                 };
 
-                newSession = _unitOfWork.Sessions.Add(newSession);
-                _unitOfWork.Commit();
+                newSession = UnitOfWork.Sessions.Add(newSession);
+                UnitOfWork.Commit();
 
                 return newSession.ToModel();
             }
@@ -48,7 +41,7 @@ namespace Photography.Data.Bolts
         {
             try
             {
-                return _unitOfWork.Sessions.Get(x => x.SessionKey == sessionKey && x.UserId == userId).ToModel();
+                return UnitOfWork.Sessions.Get(x => x.SessionKey == sessionKey && x.UserId == userId).ToModel();
             }
             catch (Exception exception)
             {
