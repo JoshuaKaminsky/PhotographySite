@@ -8,7 +8,7 @@ namespace Photography.Core.Contracts.Process
 
         User GetUserById(int userId);
 
-        User CreateUser(string emailAddress, string password);
+        User CreateUser(string name, string emailAddress, string password);
 
         bool DeleteUser(int userId);
 

@@ -10,10 +10,11 @@ namespace Photography.Core.Contracts.Service
         /// <summary>
         /// Create a new user
         /// </summary>
+        /// <param name="name">The users name</param>
         /// <param name="emailAddress">The users email address</param>
         /// <param name="password">The users password</param>
         /// <returns>The created user</returns>
-        User CreateUser(string emailAddress, string password);
+        User CreateUser(string name, string emailAddress, string password);
 
         /// <summary>
         /// Delete a user from the system

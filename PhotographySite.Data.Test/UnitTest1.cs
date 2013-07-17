@@ -12,7 +12,7 @@ namespace PhotographySite.Data.Test
         public void TestMethod1()
         {
             var userProcess = new UserProcess(new BaseUnitOfWork(new RepositoryProvider(new RepositoryFactories())));
-            var user = userProcess.CreateUser("JoshKaminsky@gmail.com", "p");
+            var user = userProcess.CreateUser("Josh Kaminsky", "JoshKaminsky@gmail.com", "p");
         }
     }
 }

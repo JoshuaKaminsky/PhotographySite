@@ -10,9 +10,9 @@ namespace Photography.Service.Bolts
         {
         }
 
-        public Core.Models.User CreateUser(string emailAddress, string password)
+        public Core.Models.User CreateUser(string name, string emailAddress, string password)
         {
-            return Process.CreateUser(emailAddress, password);
+            return Process.CreateUser(name, emailAddress, password);
         }
 
         public bool DeleteUser(int userId)

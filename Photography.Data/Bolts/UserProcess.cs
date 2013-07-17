@@ -50,7 +50,7 @@ namespace Photography.Data.Bolts
             }
         }
 
-        public User CreateUser(string emailAddress, string password)
+        public User CreateUser(string name, string emailAddress, string password)
         {
             var oldUser = UnitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
             if (oldUser != null)
@@ -62,6 +62,7 @@ namespace Photography.Data.Bolts
 
             var newUser = new UserEntity
             {
+                Name = name,
                 Password = passwordHash,
                 Salt = salt,
                 EmailAddress = emailAddress
