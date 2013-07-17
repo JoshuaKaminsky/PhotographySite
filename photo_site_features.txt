@@ -9,6 +9,7 @@ Functionality:
 Administrator
 - Create user accounts, set expiration date? set password?
 - Manage discount groups, apply discounts to users
+-> possibly make discounts more flexible, like shots are free but pay for prints, etc
 - Upload pictures, associate to user account
 - Choose pics from albums to display on Samples page
 
@@ -18,3 +19,4 @@ Users:
 
 General:
 - display watermark over images? prevent right clicking
+

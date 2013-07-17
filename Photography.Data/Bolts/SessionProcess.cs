@@ -12,7 +12,7 @@ using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {
-    public class SessionProcess : ISessionProcess
+    internal class SessionProcess : ISessionProcess
     {
         private readonly IUnitOfWork _unitOfWork;
 

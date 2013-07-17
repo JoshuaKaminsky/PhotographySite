@@ -12,3 +12,6 @@ process = what we use to make these calls to the db, userprocess contains a unit
 newSession = _unitOfWork.Sessions.Add(newSession);
 ^  unit of work has all of your tables, it's saying add a new session to that table, it does all the sql magic, that's the entity framework / orm magic
 - some core models will be extended to use for the view, like if you had an extra checkbox or something
+
+make tables based off of entities for next week
+- user, userrole, role, session, usersession (userid, sessionid)
