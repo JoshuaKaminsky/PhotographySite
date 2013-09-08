@@ -1,5 +1,5 @@
-[assembly: WebActivator.PreApplicationStartMethod(typeof(PhotographySite.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(PhotographySite.App_Start.NinjectWebCommon), "Stop")]
+//[assembly: WebActivator.PreApplicationStartMethod(typeof(PhotographySite.App_Start.NinjectWebCommon), "Start")]
+//[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(PhotographySite.App_Start.NinjectWebCommon), "Stop")]
 
 namespace PhotographySite.App_Start
 {
