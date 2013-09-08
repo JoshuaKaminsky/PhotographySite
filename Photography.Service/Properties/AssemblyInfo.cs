@@ -37,3 +37,4 @@ using System.Runtime.InteropServices;
 
 
 [assembly: InternalsVisibleTo("PhotographySite.Service.Test")]
+[assembly: InternalsVisibleTo("Photography.Service.Bootstrap")]
