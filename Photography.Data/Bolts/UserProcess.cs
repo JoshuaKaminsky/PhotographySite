@@ -17,7 +17,6 @@ namespace Photography.Data.Bolts
     {
         private static readonly RNGCryptoServiceProvider RngCryptoServiceProvider = new RNGCryptoServiceProvider();
 
-
         public UserProcess(IUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
