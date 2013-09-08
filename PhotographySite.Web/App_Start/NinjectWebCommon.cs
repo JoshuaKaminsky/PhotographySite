@@ -1,5 +1,15 @@
-//[assembly: WebActivator.PreApplicationStartMethod(typeof(PhotographySite.App_Start.NinjectWebCommon), "Start")]
-//[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(PhotographySite.App_Start.NinjectWebCommon), "Stop")]
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
+using Ninject.Modules;
+using Photography.Data.Bootstrap;
+using Photography.Service.Bootstrap;
+using PhotographySite.Web;
+
+[assembly: WebActivator.PreApplicationStartMethod(typeof(PhotographySite.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(PhotographySite.App_Start.NinjectWebCommon), "Stop")]
 
 namespace PhotographySite.App_Start
 {
@@ -53,6 +63,7 @@ namespace PhotographySite.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Load(new List<INinjectModule> { new DataModule(), new ServiceModule() });
         }        
     }
 }
