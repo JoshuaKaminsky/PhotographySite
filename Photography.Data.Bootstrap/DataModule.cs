@@ -18,6 +18,7 @@ namespace Photography.Data.Bootstrap
             Bind<ISessionProcess>().To<SessionProcess>();
             Bind<IUserProcess>().To<UserProcess>();
             Bind<IUnitOfWork>().To<BaseUnitOfWork>();
+            Bind<IRepositoryProvider>().To<RepositoryProvider>();
         }
     }
 }
