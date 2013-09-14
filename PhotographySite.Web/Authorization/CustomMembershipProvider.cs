@@ -14,6 +14,11 @@ namespace PhotographySite.Authorization
             _sessionService = sessionService;
         }
 
+        public override bool ValidateUser(string username, string password)
+        {
+            return _userService.ValidateUser(username, password);
+        }
+
         public override System.Web.Security.MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out System.Web.Security.MembershipCreateStatus status)
         {
             //return base.CreateUser(username, password, email, passwordQuestion, passwordAnswer, isApproved, providerUserKey, out status);

@@ -22,7 +22,7 @@ namespace Photography.Data.Bolts
         {
         }
 
-        public User GetUser(string emailAddress, string password)
+        public bool ValidateUser(string emailAddress, string password)
         {
             var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new List<string> { "Roles" });
             if (user == null)
@@ -31,7 +31,7 @@ namespace Photography.Data.Bolts
             if (!IsPasswordValid(password, user.Salt, user.Password))
                 throw new AuthenticationException("Invalid Password.");
 
-            return user.ToModel();
+            return user != null;
         }
 
         public User GetUserById(int userId)
@@ -43,6 +43,21 @@ namespace Photography.Data.Bolts
             catch (Exception exception)
             {
                 Trace.TraceError("Could not retrieve user by id with id {0}. {1}", userId, exception.Message);
+                Trace.TraceError(exception.ToString());
+
+                return null;
+            }
+        }
+
+        public User GetUserByEmail(string emailAddress)
+        {
+            try
+            {
+                return UnitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress)).ToModel();
+            }
+            catch (Exception exception)
+            {
+                Trace.TraceError("Could not retrieve user by id with email address {0}. {1}", emailAddress, exception.Message);
                 Trace.TraceError(exception.ToString());
 
                 return null;

@@ -8,6 +8,21 @@ namespace Photography.Core.Contracts.Service
     public interface IUserService : IService
     {
         /// <summary>
+        /// Retrieve a user
+        /// </summary>
+        /// <param name="emailAddress">The users email address</param>
+        /// <returns>A user if found, otherwise null</returns>
+        User GetUserByEmailAddress(string emailAddress);
+
+        /// <summary>
+        /// Validate a user
+        /// </summary>
+        /// <param name="emailAddress">The users email address</param>
+        /// <param name="password">The users password</param>
+        /// <returns>True if the email address and password match</returns>
+        bool ValidateUser(string emailAddress, string password);
+
+        /// <summary>
         /// Create a new user
         /// </summary>
         /// <param name="name">The users name</param>
@@ -46,5 +61,7 @@ namespace Photography.Core.Contracts.Service
         /// <returns>The new password</returns>
         /// <remarks>This is for internal/admin user only</remarks>
         string ResetPassword(int userId);
+
+
     }
 }

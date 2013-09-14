@@ -3,6 +3,8 @@ using Photography.Core.Contracts.Service;
 
 namespace Photography.Service.Bolts
 {
+    using Photography.Core.Models;
+
     internal class UserService : BaseService<IUserProcess>, IUserService
     {
         public UserService(IUserProcess process)
@@ -10,7 +12,17 @@ namespace Photography.Service.Bolts
         {
         }
 
-        public Core.Models.User CreateUser(string name, string emailAddress, string password)
+        public User GetUserByEmailAddress(string emailAddress)
+        {
+            return Process.GetUserByEmail(emailAddress);
+        }
+
+        public bool ValidateUser(string emailAddress, string password)
+        {
+            return Process.ValidateUser(emailAddress, password);
+        }
+
+        public User CreateUser(string name, string emailAddress, string password)
         {
             return Process.CreateUser(name, emailAddress, password);
         }
@@ -20,7 +32,7 @@ namespace Photography.Service.Bolts
             return Process.DeleteUser(userId);
         }
 
-        public Core.Models.User UpdateUser(Core.Models.User user)
+        public User UpdateUser(User user)
         {
             return Process.UpdateUser(user);
         }

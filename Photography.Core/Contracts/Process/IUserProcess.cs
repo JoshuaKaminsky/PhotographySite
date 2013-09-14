@@ -4,9 +4,11 @@ namespace Photography.Core.Contracts.Process
 {
     public interface IUserProcess : IProcess
     {
-        User GetUser(string emailAddress, string password);
+        bool ValidateUser(string emailAddress, string password);
 
         User GetUserById(int userId);
+
+        User GetUserByEmail(string emailAddress);
 
         User CreateUser(string name, string emailAddress, string password);
 
