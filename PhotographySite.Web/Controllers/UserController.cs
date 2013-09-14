@@ -11,10 +11,5 @@ namespace PhotographySite.Controllers
         {
             _userService = userService;
         }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
     }
 }
