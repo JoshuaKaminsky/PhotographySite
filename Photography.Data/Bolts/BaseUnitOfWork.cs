@@ -41,6 +41,11 @@ namespace Photography.Data.Bolts
             get { return GetStandardRepo<SessionEntity>(); }
         }
 
+        public IRepository<AlbumEntity> Albums
+        {
+            get { return GetStandardRepo<AlbumEntity>(); }
+        }
+
         public IRepository<PhotoEntity> Photos
         {
             get { return this.GetStandardRepo<PhotoEntity>(); }
