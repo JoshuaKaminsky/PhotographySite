@@ -29,12 +29,12 @@ namespace PhotographySite.Controllers
         [HttpPost]
         public ActionResult Login(Account model)
         {
-            if (!_userService.ValidateUser(model.EmaiAddress, model.Password))
+            if (!_userService.ValidateUser(model.EmailAddress, model.Password))
             {
                 throw new AuthenticationException();
             }
 
-            var user = _userService.GetUserByEmailAddress(model.EmaiAddress);
+            var user = _userService.GetUserByEmailAddress(model.EmailAddress);
             if (user == null)
             {
                 throw new AuthenticationException();

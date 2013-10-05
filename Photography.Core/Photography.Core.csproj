@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\Process\IAlbumProcess.cs" />
     <Compile Include="Contracts\Process\IPhotoProcess.cs" />
     <Compile Include="Contracts\Process\IProcess.cs" />
     <Compile Include="Contracts\Process\IRoleProcess.cs" />
@@ -49,6 +50,8 @@
     <Compile Include="Contracts\Service\IService.cs" />
     <Compile Include="Contracts\Service\ISessionService.cs" />
     <Compile Include="Contracts\Service\IUserService.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Session.cs" />
