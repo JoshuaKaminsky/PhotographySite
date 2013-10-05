@@ -1,6 +1,7 @@
 ﻿using System;
 using Photography.Core.Models;
 using Photography.Data.Entities;
+using System.Linq;
 
 namespace Photography.Data.Extensions
 {
@@ -52,8 +53,36 @@ namespace Photography.Data.Extensions
 
             return new Tag { Description = dataModel.Description, Id = dataModel.Id, Name = dataModel.Name };
         }
+        /*
+        public static Album ToModel(this AlbumEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
 
-        public static UserEntity ToDataModel(this User model)
+            return new Album 
+                {   AlbumCover = dataModel.AlbumCover.ToModel(), 
+                    Category = dataModel.Category.ToModel(), 
+                    CreatedOn = dataModel.CreatedOn, 
+                    Description = dataModel.Description, 
+                    Id = dataModel.Id, 
+                    IsPublic = dataModel.IsPublic, 
+                    Name = dataModel.Name 
+                };
+        } */
+
+        public static Category ToModel(this CategoryEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
+
+            return new Category
+                {
+                    Id = dataModel.Id,
+                    Name = dataModel.Name
+                };
+        }
+
+        public static UserEntity ToEntity(this User model)
         {
             if (model == null)
                 return null;

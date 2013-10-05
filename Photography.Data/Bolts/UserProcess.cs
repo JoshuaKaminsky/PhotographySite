@@ -97,7 +97,7 @@ namespace Photography.Data.Bolts
 
         public User UpdateUser(User user)
         {
-            return UnitOfWork.Users.Update(user.ToDataModel()).ToModel();
+            return UnitOfWork.Users.Update(user.ToEntity()).ToModel();
         }
 
         public bool UpdatePassword(int userId, string oldPassword, string newPassword)

@@ -46,6 +46,7 @@
     <Compile Include="Contracts\Process\ISessionProcess.cs" />
     <Compile Include="Contracts\Process\ITagProcess.cs" />
     <Compile Include="Contracts\Process\IUserProcess.cs" />
+    <Compile Include="Contracts\Service\IAlbumService.cs" />
     <Compile Include="Contracts\Service\IPhotoService.cs" />
     <Compile Include="Contracts\Service\IRoleService.cs" />
     <Compile Include="Contracts\Service\IService.cs" />
