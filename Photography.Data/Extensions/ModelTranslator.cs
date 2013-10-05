@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Photography.Core.Models;
 using Photography.Data.Entities;
 
@@ -45,6 +45,24 @@ namespace Photography.Data.Extensions
                 };
         }
 
+        public static Photo ToModel(this PhotoEntity dataModel)
+        {
+            if (dataModel == null) 
+                return null;
+
+            return new Photo()
+                       {
+                           CreatedOn = dataModel.CreatedOn,
+                           Description = dataModel.Description,
+                           Id = dataModel.Id,
+                           IsPublic = dataModel.IsPublic,
+                           Name = dataModel.Name,
+                           Source = dataModel.Source,
+                           Tags = dataModel.Tags.Select(ToModel),
+                           ThumbnailSource = dataModel.ThumbnailSource
+                       };
+        }
+
         public static Tag ToModel(this TagEntity dataModel)
         {
             if (dataModel == null) 
@@ -65,7 +83,5 @@ namespace Photography.Data.Extensions
                 Id = model.Id
             };
         }
-        
-
     }
 }

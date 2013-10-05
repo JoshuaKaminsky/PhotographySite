@@ -14,5 +14,9 @@ namespace Photography.Data.Contracts
         IRepository<RoleEntity> Roles { get; }
 
         IRepository<SessionEntity> Sessions { get; }
+
+        IRepository<PhotoEntity> Photos { get; }
+
+        IRepository<TagEntity> Tags { get; } 
     }
 }
