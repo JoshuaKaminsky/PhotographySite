@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Photography.Core.Contracts.Service
 {
-    class IPhotoService
+    public interface IPhotoService
     {
     }
 }

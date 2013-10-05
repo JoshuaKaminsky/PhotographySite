@@ -53,6 +53,7 @@
     <Compile Include="Bolts\BaseUnitOfWork.cs" />
     <Compile Include="Bolts\EFRepository.cs" />
     <Compile Include="Bolts\RepositoryProvider.cs" />
+    <Compile Include="Bolts\TagProcess.cs" />
     <Compile Include="Bolts\UserProcess.cs" />
     <Compile Include="Entities\AlbumEntity.cs" />
     <Compile Include="Entities\BaseEntity.cs" />

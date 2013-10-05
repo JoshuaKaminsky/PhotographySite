@@ -1,6 +1,58 @@
-﻿namespace Photography.Core.Contracts.Process
+﻿using Photography.Core.Models;
+using System.Collections.Generic;
+    
+namespace Photography.Core.Contracts.Process
 {
+    /// <summary>
+    /// Process for Photos
+    /// </summary>
     public interface IPhotoProcess : IProcess
     {
+        /// <summary>
+        /// Retrieve a list of photos for an album
+        /// </summary>
+        /// <param name="albumId">The album id</param>
+        /// <returns>A list of photos associated with this album</returns>
+        IEnumerable<Photo> GetAlbumPhotos(int albumId);
+
+        /// <summary>
+        /// Retrieve a photo by id
+        /// </summary>
+        /// <param name="photoId">The id of the photo</param>
+        /// <returns>The photo with the given id</returns>
+        Photo GetPhoto(int photoId);
+
+        /// <summary>
+        /// Add a photo to the database
+        /// </summary>
+        /// <param name="name">The name of the photo</param>
+        /// <param name="description">A description of the photo</param>
+        /// <param name="isPublic">Flag to determine if this photo is public or hidden</param>
+        /// <param name="data">The photo as a byte array</param>
+        /// <param name="tags">A list of tags for this photo</param>
+        /// <returns>The newly added photo</returns>
+        Photo AddPhoto(string name, string description, bool isPublic, byte[] data, IEnumerable<Tag> tags);
+
+        /// <summary>
+        /// Update a photo
+        /// </summary>
+        /// <param name="photo">The photo to update</param>
+        /// <returns>The udated photo</returns>
+        Photo UpdatePhoto(Photo photo);
+
+        /// <summary>
+        /// Remove a photo from an album
+        /// </summary>
+        /// <param name="albumId">The id of the album</param>
+        /// <param name="photoId">The id of the photo</param>
+        /// <returns>True if successful, otherwise false</returns>
+        bool RemovePhotoFromAlbum(int albumId, int photoId);
+
+        /// <summary>
+        /// Delete a photo
+        /// </summary>
+        /// <param name="photoId">The id of the photo to delete</param>
+        /// <returns>True if successful, otherwise false</returns>
+        bool DeletePhoto(int photoId);
     }
 }

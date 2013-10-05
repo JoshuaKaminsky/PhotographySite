@@ -45,6 +45,14 @@ namespace Photography.Data.Extensions
                 };
         }
 
+        public static Tag ToModel(this TagEntity dataModel)
+        {
+            if (dataModel == null) 
+                return null;
+
+            return new Tag { Description = dataModel.Description, Id = dataModel.Id, Name = dataModel.Name };
+        }
+
         public static UserEntity ToDataModel(this User model)
         {
             if (model == null)
@@ -58,5 +66,6 @@ namespace Photography.Data.Extensions
             };
         }
         
+
     }
 }
