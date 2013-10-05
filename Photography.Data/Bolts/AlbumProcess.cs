@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {       
@@ -38,22 +39,22 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags)
+        public Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
             throw new NotImplementedException();
         }
 
-        Album UpdateAlbum(int id, Photo albumCover)
+        public Album UpdateAlbum(int id, Photo albumCover)
         {
             throw new NotImplementedException();
         }
 
-        Album UpdateAlbum(int id, Category category)
+        public Album UpdateAlbum(int id, Category category)
         {
             throw new NotImplementedException();
         }
 
-        Album DeleteAlbum(int id)
+        public Album DeleteAlbum(int id)
         {
             throw new NotImplementedException();
         }

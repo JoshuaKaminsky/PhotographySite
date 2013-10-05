@@ -71,7 +71,7 @@ namespace Photography.Data.Extensions
 
             return new Tag { Description = dataModel.Description, Id = dataModel.Id, Name = dataModel.Name };
         }
-        /*
+        
         public static Album ToModel(this AlbumEntity dataModel)
         {
             if (dataModel == null)
@@ -86,7 +86,7 @@ namespace Photography.Data.Extensions
                     IsPublic = dataModel.IsPublic, 
                     Name = dataModel.Name 
                 };
-        } */
+        } 
 
         public static Category ToModel(this CategoryEntity dataModel)
         {
