@@ -1,7 +1,12 @@
-﻿using Photography.Core.Contracts.Process;
+﻿using System;
+using System.Data;
+using System.Linq;
+using Photography.Core.Contracts.Process;
 using Photography.Core.Models;
 using Photography.Data.Contracts;
 using System.Collections.Generic;
+using Photography.Data.Entities;
+using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts
 {
@@ -14,22 +19,42 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Photo> GetAlbumPhotos(int albumId)
         {
-            throw new System.NotImplementedException();
+            return UnitOfWork.Photos.GetAll(photo => photo.Albums.Any(album => album.Id == albumId)).Select(photo => photo.ToModel());
         }
 
         public Photo GetPhoto(int photoId)
         {
-            throw new System.NotImplementedException();
+            return UnitOfWork.Photos.GetById(photoId).ToModel();
         }
 
-        public Photo AddPhoto(string name, string description, bool isPublic, byte[] data, IEnumerable<Tag> tags)
+        public Photo AddPhoto(string name, string description, bool isPublic, string source, string thumbnail, IEnumerable<Tag> tags, int albumId)
         {
-            throw new System.NotImplementedException();
+            var album = UnitOfWork.Albums.GetById(albumId);
+            if(album == null)
+            {
+                throw new DataException(string.Format("Album with id {0} does not exist.", albumId));
+            }
+
+            var tagEntities = new List<TagEntity>();
+
+            var entity = new PhotoEntity()
+                {
+                    Albums = new List<AlbumEntity>(new[] {album}),
+                    CreatedOn = DateTime.UtcNow,
+                    Description = description,
+                    IsPublic = isPublic,
+                    Name = name,
+                    Source = source,
+                    ThumbnailSource = thumbnail,
+                    Tags = tagEntities
+                };
+
+            return UnitOfWork.Photos.Add(entity).ToModel();
         }
 
         public Photo UpdatePhoto(Photo photo)
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public bool RemovePhotoFromAlbum(int albumId, int photoId)

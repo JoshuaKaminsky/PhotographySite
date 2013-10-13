@@ -28,10 +28,12 @@ namespace Photography.Core.Contracts.Process
         /// <param name="name">The name of the photo</param>
         /// <param name="description">A description of the photo</param>
         /// <param name="isPublic">Flag to determine if this photo is public or hidden</param>
-        /// <param name="data">The photo as a byte array</param>
+        /// <param name="source">The path to the photo source</param>
+        /// <param name="thumbnail">The path to the thumbnail source</param>
         /// <param name="tags">A list of tags for this photo</param>
+        /// <param name="albumId">The id of the album to add this photo to</param>
         /// <returns>The newly added photo</returns>
-        Photo AddPhoto(string name, string description, bool isPublic, byte[] data, IEnumerable<Tag> tags);
+        Photo AddPhoto(string name, string description, bool isPublic, string source, string thumbnail, IEnumerable<Tag> tags, int albumId);
 
         /// <summary>
         /// Update a photo

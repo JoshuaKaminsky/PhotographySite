@@ -7,33 +7,34 @@ namespace Photography.Service.Bolts
 {
     internal class TagService : BaseService<ITagProcess>, ITagService
     {
-        public TagService(ITagProcess process) : base(process)
+        public TagService(ITagProcess process) 
+            : base(process)
         {
         }
 
         public Tag CreateTag(string name, string description)
         {
-            throw new System.NotImplementedException();
+            return Process.CreateTag(name, description);
         }
 
         public IEnumerable<Tag> GetTags()
         {
-            throw new System.NotImplementedException();
+            return Process.GetTags();
         }
 
         public Tag GetTag(int tagId)
         {
-            throw new System.NotImplementedException();
+            return Process.GetTag(tagId);
         }
 
         public Tag UpdateTag(Tag tag)
         {
-            throw new System.NotImplementedException();
+            return Process.UpdateTag(tag);
         }
 
         public bool DeleteTag(int tagId)
         {
-            throw new System.NotImplementedException();
+            return Process.DeleteTag(tagId);
         }
     }
 }
