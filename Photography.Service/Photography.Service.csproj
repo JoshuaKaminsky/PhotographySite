@@ -39,9 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bolts\AlbumService.cs" />
     <Compile Include="Bolts\BaseService.cs" />
+    <Compile Include="Bolts\PhotoService.cs" />
     <Compile Include="Bolts\RoleService.cs" />
     <Compile Include="Bolts\SessionService.cs" />
+    <Compile Include="Bolts\TagService.cs" />
     <Compile Include="Bolts\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

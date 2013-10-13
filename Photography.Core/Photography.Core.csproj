@@ -55,8 +55,10 @@
     <Compile Include="Contracts\Service\IUserService.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\AlbumSearchCriteria.cs" />
     <Compile Include="Models\Session.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\User.cs" />
