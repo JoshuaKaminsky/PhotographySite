@@ -19,6 +19,6 @@ namespace Photography.Core.Contracts.Service
 
         Album UpdateAlbumCategory(int albumId, int categoryId);
 
-        Album DeleteAlbum(int albumId);
+        bool DeleteAlbum(int albumId);
     }
 }

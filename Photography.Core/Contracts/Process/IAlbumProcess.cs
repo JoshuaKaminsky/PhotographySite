@@ -5,13 +5,17 @@ namespace Photography.Core.Contracts.Process
 {
     public interface IAlbumProcess : IProcess
     {
+        IEnumerable<Album> GetAlbums();
+
+        IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria);
+        
         Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags);
 
         Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags);
 
-        Album UpdateAlbum(int id, Photo albumCover);
+        Album UpdateAlbumCover(int id, int albumCoverId);
 
-        Album UpdateAlbum(int id, Category category);
+        Album UpdateAlbumCategory(int id, int categoryId);
 
         bool DeleteAlbum(int id);
     }

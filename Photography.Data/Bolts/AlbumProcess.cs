@@ -59,7 +59,7 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        public Album UpdateAlbum(int id, Photo albumCover)
+        public Album UpdateAlbumCover(int id, int albumCoverId)
         {
             var oldAlbum = UnitOfWork.Albums.GetById(id);
             if (oldAlbum == null)
@@ -67,7 +67,7 @@ namespace Photography.Data.Bolts
 
             var newAlbum = new AlbumEntity
             {
-                AlbumCoverId = albumCover.Id   
+                AlbumCoverId = albumCoverId   
             };
 
             newAlbum = UnitOfWork.Albums.Update(newAlbum);
@@ -76,7 +76,7 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        public Album UpdateAlbum(int id, Category category)
+        public Album UpdateAlbumCategory(int id, int categoryId)
         {
             var oldAlbum = UnitOfWork.Albums.GetById(id);
             if (oldAlbum == null)
@@ -84,7 +84,7 @@ namespace Photography.Data.Bolts
 
             var newAlbum = new AlbumEntity
             {
-                CategoryId = category.Id
+                CategoryId = categoryId
             };
 
             newAlbum = UnitOfWork.Albums.Update(newAlbum);
