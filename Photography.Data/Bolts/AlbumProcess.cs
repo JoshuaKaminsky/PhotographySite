@@ -19,6 +19,32 @@ namespace Photography.Data.Bolts
         {
         }
 
+        private class AlbumComparer : IEqualityComparer<AlbumEntity>
+        {
+            public bool Equals(AlbumEntity x, AlbumEntity y)
+            {
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode(AlbumEntity obj)
+            {
+                return obj.GetHashCode();
+            }
+        }
+
+        public IEnumerable<Album> GetAlbums()
+        {
+            return UnitOfWork.Albums.GetAll().Select(album => album.ToModel());
+        }
+
+        public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)
+        {
+            var startsWith = UnitOfWork.Albums.GetAll(x => x.Name.StartsWith(searchCriteria.NameFilter, true, null));
+            var contains = UnitOfWork.Albums.GetAll(x => x.Name.ToLower().Contains(searchCriteria.NameFilter.ToLower()));
+            
+            return startsWith.Union(contains, new AlbumComparer()).Select(album => album.ToModel());
+        }
+
         public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
             var oldAlbum = UnitOfWork.Albums.Get(album => album.Name.Equals(name));

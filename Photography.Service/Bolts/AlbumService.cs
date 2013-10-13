@@ -47,7 +47,7 @@ namespace Photography.Service.Bolts
             throw new System.NotImplementedException();
         }
 
-        public Album DeleteAlbum(int albumId)
+        public bool DeleteAlbum(int albumId)
         {
             throw new System.NotImplementedException();
         }
