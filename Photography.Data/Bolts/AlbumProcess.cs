@@ -41,22 +41,61 @@ namespace Photography.Data.Bolts
 
         public Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
-            throw new NotImplementedException();
+            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            if (oldAlbum == null)
+                throw new DataException("Album could not be retrieved.");
+
+            var newAlbum = new AlbumEntity
+            {
+                Name = name,
+                Description = description,
+                IsPublic = isPublic,
+                Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList()
+            };
+
+            newAlbum = UnitOfWork.Albums.Update(newAlbum);
+            UnitOfWork.Commit();
+
+            return newAlbum.ToModel();
         }
 
         public Album UpdateAlbum(int id, Photo albumCover)
         {
-            throw new NotImplementedException();
+            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            if (oldAlbum == null)
+                throw new DataException("Album could not be retrieved.");
+
+            var newAlbum = new AlbumEntity
+            {
+                AlbumCoverId = albumCover.Id   
+            };
+
+            newAlbum = UnitOfWork.Albums.Update(newAlbum);
+            UnitOfWork.Commit();
+
+            return newAlbum.ToModel();
         }
 
         public Album UpdateAlbum(int id, Category category)
         {
-            throw new NotImplementedException();
+            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            if (oldAlbum == null)
+                throw new DataException("Album could not be retrieved.");
+
+            var newAlbum = new AlbumEntity
+            {
+                CategoryId = category.Id
+            };
+
+            newAlbum = UnitOfWork.Albums.Update(newAlbum);
+            UnitOfWork.Commit();
+
+            return newAlbum.ToModel();
         }
 
-        public Album DeleteAlbum(int id)
+        public bool DeleteAlbum(int id)
         {
-            throw new NotImplementedException();
+            return UnitOfWork.Albums.GetById(id) == null || UnitOfWork.Albums.Delete(id);
         }
     }
 }
