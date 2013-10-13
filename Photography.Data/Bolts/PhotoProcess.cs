@@ -54,7 +54,7 @@ namespace Photography.Data.Bolts
 
         public Photo UpdatePhoto(Photo photo)
         {
-            
+            throw new System.NotImplementedException();
         }
 
         public bool RemovePhotoFromAlbum(int albumId, int photoId)
