@@ -1,0 +1,13 @@
+﻿@model System.Collections.Generic.List<Photography.Core.Models.Album>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+ @foreach(var obj in Model)
+ {
+     <div>@obj.Name</div>
+ }

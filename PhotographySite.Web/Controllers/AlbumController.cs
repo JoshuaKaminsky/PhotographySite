@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Photography.Core.Contracts.Service;
+using Photography.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,12 +10,16 @@ namespace PhotographySite.Controllers
 {
     public class AlbumController : Controller
     {
-        //
-        // GET: /Album/
+        private readonly IAlbumService _albumService;
 
+        public AlbumController(IAlbumService albumService)
+        {
+            this._albumService = albumService;
+        }
+        
         public ActionResult Index()
         {
-            return View();
+            return View(_albumService.GetAlbums());
         }
 
     }

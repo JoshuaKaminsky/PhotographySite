@@ -21,7 +21,8 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Album> GetAlbums()
         {
-            return UnitOfWork.Albums.GetAll().Select(album => album.ToModel());
+            var albums = UnitOfWork.Albums.GetAll().ToList();
+            return albums.Select(x => x.ToModel());
         }
 
         public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)

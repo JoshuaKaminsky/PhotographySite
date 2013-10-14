@@ -14,7 +14,7 @@ namespace Photography.Service.Bolts
 
         public IEnumerable<Album> GetAlbums()
         {
-            throw new System.NotImplementedException();
+            return Process.GetAlbums();
         }
 
         public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)
