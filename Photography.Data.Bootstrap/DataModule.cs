@@ -9,9 +9,15 @@ namespace Photography.Data.Bootstrap
     {
         public override void Load()
         {
+            Bind<IAlbumProcess>().To<AlbumProcess>();
+            Bind<IPhotoProcess>().To<PhotoProcess>();
+            Bind<ITagProcess>().To<TagProcess>();
+
+
             Bind<IRoleProcess>().To<RoleProcess>();
             Bind<ISessionProcess>().To<SessionProcess>();
             Bind<IUserProcess>().To<UserProcess>();
+
             Bind<IUnitOfWork>().To<BaseUnitOfWork>();
             Bind<IRepositoryProvider>().To<RepositoryProvider>();
         }
