@@ -17,6 +17,12 @@ namespace Photography.Data
 
         public DbSet<UserEntity> Users { get; set; }
 
+        public DbSet<AlbumEntity> Albums { get; set; }
+
+        public DbSet<PhotoEntity> Photos { get; set; }
+
+        public DbSet<TagEntity> Tags { get; set; }
+
         static BaseDbContext()
         {
         }
