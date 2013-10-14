@@ -1,9 +1,7 @@
 ﻿namespace Photography.Core.Models
 {
-    public class Tag
+    public class Tag : BaseModel
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

@@ -112,5 +112,53 @@ namespace Photography.Data.Extensions
                 Id = model.Id
             };
         }
+
+        public static AlbumEntity ToEntity(this Album model)
+        {
+            if (model == null)
+                return null;
+
+            return new AlbumEntity()
+                {
+                    AlbumCoverId = (model.AlbumCover != null) ? model.AlbumCover.Id : 0,
+                    CategoryId = (model.Category != null) ? model.Category.Id : 0,
+                    CreatedOn = model.CreatedOn,
+                    Description = model.Description,
+                    Id = model.Id,
+                    IsPublic = model.IsPublic,
+                    Name = model.Name,
+                };
+        }
+
+        public static PhotoEntity ToEntity(this Photo model)
+        {
+            if (model == null)
+                return null;
+
+            return new PhotoEntity()
+                {
+                    CreatedOn = model.CreatedOn,
+                    Description = model.Description,
+                    Id = model.Id,
+                    IsPublic = model.IsPublic,
+                    Name = model.Name,
+                    Source = model.Source,
+                    ThumbnailSource = model.ThumbnailSource,
+                    Tags = (model.Tags != null) ? model.Tags.Select(ToEntity).ToList() : null
+                };
+        }
+
+        public static TagEntity ToEntity(this Tag model)
+        {
+            if (model == null)
+                return null;
+
+            return new TagEntity
+                {
+                    Description = model.Description,
+                    Id = model.Id,
+                    Name = model.Name
+                };
+        }
     }
 }

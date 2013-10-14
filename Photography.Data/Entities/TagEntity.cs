@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Photography.Data.Entities
 {
     [Table("Tag")]
     internal class TagEntity : BaseEntity
     {
+        public TagEntity()
+        {
+            Albums = new List<AlbumEntity>();
+            Photos = new List<PhotoEntity>();
+        }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

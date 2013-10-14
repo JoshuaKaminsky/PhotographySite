@@ -54,6 +54,7 @@
     <Compile Include="Contracts\Service\ITagService.cs" />
     <Compile Include="Contracts\Service\IUserService.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\Photo.cs" />

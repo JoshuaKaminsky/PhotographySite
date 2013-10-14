@@ -6,6 +6,13 @@ namespace Photography.Core.Contracts.Service
     public interface IPhotoService : IService
     {
         /// <summary>
+        /// Retrieve a photo by id
+        /// </summary>
+        /// <param name="photoId">The id of the photo</param>
+        /// <returns>The photo with the given id</returns>
+        Photo GetPhoto(int photoId);
+
+        /// <summary>
         /// Retrieve a list of photos for an album
         /// </summary>
         /// <param name="albumId">The album id</param>
@@ -19,13 +26,6 @@ namespace Photography.Core.Contracts.Service
         /// <returns>All photos meeting the given search criteria</returns>
         IEnumerable<Photo> GetPhotos(SearchCriteria searchCriteria);
         
-        /// <summary>
-        /// Retrieve a photo by id
-        /// </summary>
-        /// <param name="photoId">The id of the photo</param>
-        /// <returns>The photo with the given id</returns>
-        Photo GetPhoto(int photoId);
-
         /// <summary>
         /// Add a photo to the database
         /// </summary>

@@ -9,6 +9,13 @@ namespace Photography.Core.Contracts.Process
     public interface IPhotoProcess : IProcess
     {
         /// <summary>
+        /// Retrieve a photo by id
+        /// </summary>
+        /// <param name="photoId">The id of the photo</param>
+        /// <returns>The photo with the given id</returns>
+        Photo GetPhoto(int photoId);
+
+        /// <summary>
         /// Retrieve a list of photos for an album
         /// </summary>
         /// <param name="albumId">The album id</param>
@@ -16,12 +23,12 @@ namespace Photography.Core.Contracts.Process
         IEnumerable<Photo> GetAlbumPhotos(int albumId);
 
         /// <summary>
-        /// Retrieve a photo by id
+        /// Get photos meeting a certain search criteria
         /// </summary>
-        /// <param name="photoId">The id of the photo</param>
-        /// <returns>The photo with the given id</returns>
-        Photo GetPhoto(int photoId);
-
+        /// <param name="searchCriteria">The search criteria</param>
+        /// <returns>All photos meeting the given search criteria</returns>
+        IEnumerable<Photo> GetPhotos(SearchCriteria searchCriteria);
+        
         /// <summary>
         /// Add a photo to the database
         /// </summary>
