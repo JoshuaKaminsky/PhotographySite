@@ -13,7 +13,7 @@ namespace Photography.Service.Bolts
 
         public IEnumerable<Photo> GetAlbumPhotos(int albumId)
         {
-            throw new System.NotImplementedException();
+            return Process.GetAlbumPhotos(albumId);
         }
 
         public IEnumerable<Photo> GetPhotos(SearchCriteria searchCriteria)
@@ -23,7 +23,7 @@ namespace Photography.Service.Bolts
 
         public Photo GetPhoto(int photoId)
         {
-            throw new System.NotImplementedException();
+            return Process.GetPhoto(photoId);
         }
 
         public Photo AddPhoto(string name, string description, bool isPublic, byte[] data, IEnumerable<Tag> tags)
@@ -33,17 +33,17 @@ namespace Photography.Service.Bolts
 
         public Photo UpdatePhoto(Photo photo)
         {
-            throw new System.NotImplementedException();
+            return Process.UpdatePhoto(photo);
         }
 
         public bool RemovePhotoFromAlbum(int albumId, int photoId)
         {
-            throw new System.NotImplementedException();
+            return Process.RemovePhotoFromAlbum(albumId, photoId);
         }
 
         public bool DeletePhoto(int photoId)
         {
-            throw new System.NotImplementedException();
+            return Process.DeletePhoto(photoId);
         }
     }
 }
