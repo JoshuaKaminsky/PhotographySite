@@ -9,11 +9,13 @@
     @Styles.Render("~/Content/bootstrap/base")
     @Styles.Render("~/Content/bootstrap/theme")
 </head>
-<body>
-    @RenderBody()
+    <body>
+        @Html.Partial("_Login");
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderBody()
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
