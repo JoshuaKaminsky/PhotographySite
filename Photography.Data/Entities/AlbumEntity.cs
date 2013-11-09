@@ -19,7 +19,7 @@ namespace Photography.Data.Entities
 
         [ForeignKey("AlbumCoverId")]
         public virtual PhotoEntity AlbumCover { get; set; }
-        public int AlbumCoverId { get; set; }
+        public int? AlbumCoverId { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual CategoryEntity Category { get; set; }

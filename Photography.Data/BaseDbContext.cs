@@ -34,8 +34,8 @@ namespace Photography.Data
                 .WithMany(photo => photo.Albums)
                 .Map(map =>
                     {
-                        map.MapLeftKey("AlbumId");
-                        map.MapRightKey("PhotoId");
+                        map.MapLeftKey("PhotoId");
+                        map.MapRightKey("AlbumId");
                         map.ToTable("PhotoAlbum");
                     });
 
