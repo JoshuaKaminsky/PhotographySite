@@ -1,15 +1,21 @@
-﻿using Photography.Core.Contracts.Process;
+﻿using System;
+using System.Collections.Generic;
+using Photography.Core.Contracts.Process;
 using Photography.Core.Contracts.Service;
+using Photography.Core.Models;
 
 namespace Photography.Service.Bolts
 {
-    using Photography.Core.Models;
-
     internal class UserService : BaseService<IUserProcess>, IUserService
     {
         public UserService(IUserProcess process)
             : base(process)
         {
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return Process.GetUsers();
         }
 
         public User GetUserByEmailAddress(string emailAddress)
@@ -27,6 +33,15 @@ namespace Photography.Service.Bolts
             return Process.CreateUser(name, emailAddress, password);
         }
 
+        public User CreateUser(string name, string emailAddress)
+        {
+            var user = Process.CreateUser(name, emailAddress, Guid.NewGuid().ToString());
+
+            this.ResetPasswordRequest(user.Id);
+
+            return user;
+        }
+
         public bool DeleteUser(int userId)
         {
             return Process.DeleteUser(userId);
@@ -42,9 +57,14 @@ namespace Photography.Service.Bolts
             return Process.UpdatePassword(userId, oldPassword, newPassword);
         }
 
-        public string ResetPassword(int userId)
+        public bool ResetPasswordRequest(int userId)
         {
-            throw new System.NotImplementedException();
+            var request = Process.ResetPassword(userId);
+
+            //send the email for resetting a password
+
+            return true;
         }
+
     }
 }

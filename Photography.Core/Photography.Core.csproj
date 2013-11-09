@@ -56,6 +56,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ResetPasswordRequest.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Role.cs" />

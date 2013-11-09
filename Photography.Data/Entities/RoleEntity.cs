@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Photography.Data.Entities
 {
@@ -10,6 +11,7 @@ namespace Photography.Data.Entities
             Users = new List<UserEntity>();
         }
 
+        [Required]
         public string Name { get; set; }
 
         public virtual ICollection<UserEntity> Users { get; set; }

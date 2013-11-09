@@ -1,4 +1,5 @@
-﻿using Photography.Core.Models;
+﻿using System.Collections.Generic;
+using Photography.Core.Models;
 
 namespace Photography.Core.Contracts.Service
 {
@@ -7,6 +8,11 @@ namespace Photography.Core.Contracts.Service
     /// </summary>
     public interface IUserService : IService
     {
+        /// <summary>
+        /// Retrieve a list of all users
+        /// </summary>
+        IEnumerable<User> GetUsers();
+        
         /// <summary>
         /// Retrieve a user
         /// </summary>
@@ -30,6 +36,15 @@ namespace Photography.Core.Contracts.Service
         /// <param name="password">The users password</param>
         /// <returns>The created user</returns>
         User CreateUser(string name, string emailAddress, string password);
+
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="name">The users name</param>
+        /// <param name="emailAddress">The users email address</param>
+        /// <returns>The created user</returns>
+        /// <remarks> Will create a default password and email the user </remarks>
+        User CreateUser(string name, string emailAddress);
 
         /// <summary>
         /// Delete a user from the system
@@ -60,8 +75,6 @@ namespace Photography.Core.Contracts.Service
         /// <param name="userId">The id of the user</param>
         /// <returns>The new password</returns>
         /// <remarks>This is for internal/admin user only</remarks>
-        string ResetPassword(int userId);
-
-
+        bool ResetPasswordRequest(int userId);
     }
 }

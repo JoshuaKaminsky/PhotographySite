@@ -1,6 +1,6 @@
 ﻿namespace PhotographySite.Models
 {
-    public class Account
+    public class LoginModel
     {
         public string EmailAddress { get; set; }
 

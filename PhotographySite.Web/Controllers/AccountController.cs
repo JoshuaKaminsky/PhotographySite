@@ -25,7 +25,7 @@ namespace PhotographySite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Account model)
+        public ActionResult Login(LoginModel model)
         {
             if (!_userService.ValidateUser(model.EmailAddress, model.Password))
             {
@@ -48,6 +48,25 @@ namespace PhotographySite.Controllers
             HttpContext.Response.Cookies.Add(authCookie);
 
             return new RedirectResult("Home/Index");
+        }
+
+        public ActionResult Users()
+        {
+            var users = _userService.GetUsers();
+            return View(users);
+        }
+
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(string name, string emailAddress)
+        {
+            var user = _userService.CreateUser(name, emailAddress);
+
+            return new RedirectResult("Users");
         }
     }
 }

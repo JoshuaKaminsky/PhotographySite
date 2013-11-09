@@ -1,10 +1,13 @@
-﻿using Photography.Core.Models;
+﻿using System.Collections.Generic;
+using Photography.Core.Models;
 
 namespace Photography.Core.Contracts.Process
 {
     public interface IUserProcess : IProcess
     {
         bool ValidateUser(string emailAddress, string password);
+
+        IEnumerable<User> GetUsers();
 
         User GetUserById(int userId);
 
@@ -17,5 +20,7 @@ namespace Photography.Core.Contracts.Process
         User UpdateUser(User user);
 
         bool UpdatePassword(int userId, string oldPassword, string newPassword);
+
+        ResetPasswordRequest ResetPassword(int userId);
     }
 }
