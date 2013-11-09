@@ -17,13 +17,13 @@ namespace Photography.Data.Entities
 
         public string Description { get; set; }
 
-        [ForeignKey("AlbumCover")]
-        public int AlbumCoverId { get; set; }
+        [ForeignKey("AlbumCoverId")]
         public virtual PhotoEntity AlbumCover { get; set; }
+        public int AlbumCoverId { get; set; }
 
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
         public virtual CategoryEntity Category { get; set; }
+        public int CategoryId { get; set; }
 
         public bool IsPublic { get; set; }
 

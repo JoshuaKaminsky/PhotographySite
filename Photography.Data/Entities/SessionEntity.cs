@@ -8,9 +8,9 @@ namespace Photography.Data.Entities
     {
         public Guid SessionKey { get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
+        [ForeignKey("UserId")]
         public virtual UserEntity User { get; set; }
+        public int UserId { get; set; }
 
         public DateTime CreatedOn { get; set; }
     }

@@ -31,17 +31,17 @@ namespace Photography.Data
         {
             modelBuilder.Entity<AlbumEntity>()
                 .HasMany(album => album.Photos)
-                .WithMany()
+                .WithMany(photo => photo.Albums)
                 .Map(map =>
                     {
-                        map.MapLeftKey("PhotoId");
-                        map.MapRightKey("AlbumId");
+                        map.MapLeftKey("AlbumId");
+                        map.MapRightKey("PhotoId");
                         map.ToTable("PhotoAlbum");
                     });
 
             modelBuilder.Entity<AlbumEntity>()
                 .HasMany(album => album.Tags)
-                .WithMany()
+                .WithMany(tag => tag.Albums)
                 .Map(map =>
                 {
                     map.MapLeftKey("AlbumId");
@@ -51,7 +51,7 @@ namespace Photography.Data
 
             modelBuilder.Entity<PhotoEntity>()
                 .HasMany(photo => photo.Tags)
-                .WithMany()
+                .WithMany(tag => tag.Photos)
                 .Map(map =>
                 {
                     map.MapLeftKey("PhotoId");
@@ -61,7 +61,7 @@ namespace Photography.Data
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(user => user.Albums)
-                .WithMany()
+                .WithMany(album => album.Users)
                 .Map(map =>
                 {
                     map.MapLeftKey("UserId");
@@ -71,7 +71,7 @@ namespace Photography.Data
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(user => user.Roles)
-                .WithMany()
+                .WithMany(role => role.Users)
                 .Map(map =>
                     {
                         map.MapLeftKey("UserId");
