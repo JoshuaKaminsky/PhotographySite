@@ -1,14 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Security.Authentication;
+using System.Web.Mvc;
+using System.Web.Security;
+using Photography.Core.Contracts.Service;
+using PhotographySite.Authorization;
+using PhotographySite.Models;
 
 namespace PhotographySite.Controllers
 {
-    using System.Security.Authentication;
-    using System.Web.Security;
-
-    using Photography.Core.Contracts.Service;
-
-    using PhotographySite.Models;
-
     public class AccountController : Controller
     {
         private readonly ISessionService _sessionService;
@@ -17,8 +15,8 @@ namespace PhotographySite.Controllers
 
         public AccountController(ISessionService sessionService, IUserService userService)
         {
-            this._sessionService = sessionService;
-            this._userService = userService;
+            _sessionService = sessionService;
+            _userService = userService;
         }
 
         public ActionResult Login()
@@ -41,6 +39,13 @@ namespace PhotographySite.Controllers
             }
 
             var session = _sessionService.CreateSession(user.Id);
+
+            var authCookie = FormsAuthentication.GetAuthCookie(user.Id.ToString(), false);
+
+            authCookie.Values.Add(AuthenticationConstants.AuthenticationCookieUserId, user.Id.ToString());
+            authCookie.Values.Add(AuthenticationConstants.AuthenticationCookieSessionId, session.SessionKey.ToString());
+
+            HttpContext.Response.Cookies.Add(authCookie);
 
             return new RedirectResult("Home/Index");
         }

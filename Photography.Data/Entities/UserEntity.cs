@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Photography.Data.Entities
 {
     [Table("User")]
@@ -7,6 +8,7 @@ namespace Photography.Data.Entities
     {
         public UserEntity()
         {
+            Albums = new List<AlbumEntity>();
             Roles = new List<RoleEntity>();
         }
 

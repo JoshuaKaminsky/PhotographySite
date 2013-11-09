@@ -7,19 +7,23 @@ namespace Photography.Data.Entities
     [Table("Album")]
     internal class AlbumEntity : BaseEntity
     {
+        public AlbumEntity()
+        {
+            Tags = new List<TagEntity>();
+            Photos = new List<PhotoEntity>();
+            Users = new List<UserEntity>();
+        }
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        [ForeignKey("AlbumCover")] // name of the session property that gets populated from this foreign key
+        [ForeignKey("AlbumCover")]
         public int AlbumCoverId { get; set; }
+        public virtual PhotoEntity AlbumCover { get; set; }
 
-        public PhotoEntity AlbumCover { get; set; }
-
-        [ForeignKey("Category")] // name of the session property that gets populated from this foreign key
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
-
-        public CategoryEntity Category { get; set; }
+        public virtual CategoryEntity Category { get; set; }
 
         public bool IsPublic { get; set; }
 

@@ -1,5 +1,21 @@
-﻿@{
+﻿@model PhotographySite.Models.Account
+
+@{
     ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
+
+<form  method="POST">
+    <div>
+        @Html.LabelFor(model => model.EmailAddress)
+        @Html.TextBoxFor(model => model.EmailAddress)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Password)
+        @Html.PasswordFor(model => model.Password)
+    </div>
+    
+    <button type="submit">Login</button>
+</form>

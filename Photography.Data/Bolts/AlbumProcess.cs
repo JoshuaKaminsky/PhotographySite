@@ -2,12 +2,9 @@
 using Photography.Core.Models;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Photography.Data.Extensions;
 
 namespace Photography.Data.Bolts

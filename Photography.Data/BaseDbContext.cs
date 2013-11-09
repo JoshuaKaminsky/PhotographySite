@@ -29,6 +29,56 @@ namespace Photography.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AlbumEntity>()
+                .HasMany(album => album.Photos)
+                .WithMany()
+                .Map(map =>
+                    {
+                        map.MapLeftKey("PhotoId");
+                        map.MapRightKey("AlbumId");
+                        map.ToTable("PhotoAlbum");
+                    });
+
+            modelBuilder.Entity<AlbumEntity>()
+                .HasMany(album => album.Tags)
+                .WithMany()
+                .Map(map =>
+                {
+                    map.MapLeftKey("AlbumId");
+                    map.MapRightKey("TagId");
+                    map.ToTable("AlbumTag");
+                });
+
+            modelBuilder.Entity<PhotoEntity>()
+                .HasMany(photo => photo.Tags)
+                .WithMany()
+                .Map(map =>
+                {
+                    map.MapLeftKey("PhotoId");
+                    map.MapRightKey("TagId");
+                    map.ToTable("PhotoTag");
+                });
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(user => user.Albums)
+                .WithMany()
+                .Map(map =>
+                {
+                    map.MapLeftKey("UserId");
+                    map.MapRightKey("AlbumId");
+                    map.ToTable("UserAlbum");
+                });
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(user => user.Roles)
+                .WithMany()
+                .Map(map =>
+                    {
+                        map.MapLeftKey("UserId");
+                        map.MapRightKey("RoleId");
+                        map.ToTable("UserRole");
+                    });
+
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
