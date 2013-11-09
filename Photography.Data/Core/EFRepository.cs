@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 
-namespace Photography.Data.Bolts
+namespace Photography.Data.Core
 {
     internal class EFRepository<T> : IRepository<T> where T : BaseEntity
     {

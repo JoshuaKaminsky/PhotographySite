@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using Photography.Data.Bolts;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 
-namespace Photography.Data
+namespace Photography.Data.Core
 {
     /// <summary>
     /// A maker of Repositories.

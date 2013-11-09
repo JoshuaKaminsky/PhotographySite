@@ -1,0 +1,22 @@
+﻿@model PhotographySite.Models.CreateUserModel
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+<h2>Create User</h2>
+
+<form  method="POST">
+
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name)
+    </div>
+    
+    <div>
+        @Html.LabelFor(model => model.EmailAddress)
+        @Html.TextBoxFor(model => model.EmailAddress)
+    </div>
+
+    <button type="submit">Login</button>
+</form>

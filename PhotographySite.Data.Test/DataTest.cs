@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Photography.Data;
 using Photography.Data.Bolts;
+using Photography.Data.Core;
 
 namespace PhotographySite.Data.Test
 {

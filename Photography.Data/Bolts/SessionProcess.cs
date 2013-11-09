@@ -1,4 +1,5 @@
 ﻿using Photography.Core.Contracts.Process;
+using Photography.Core.Models;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 using System;
@@ -14,7 +15,7 @@ namespace Photography.Data.Bolts
         {
         }
 
-        public Core.Models.Session CreateSession(int userId)
+        public Session CreateSession(int userId)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace Photography.Data.Bolts
             }
         }
 
-        public Core.Models.Session GetSession(int userId, Guid sessionKey)
+        public Session GetSession(int userId, Guid sessionKey)
         {
             try
             {

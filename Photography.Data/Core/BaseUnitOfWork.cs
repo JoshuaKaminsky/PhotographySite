@@ -2,7 +2,7 @@
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 
-namespace Photography.Data.Bolts
+namespace Photography.Data.Core
 {
     internal class BaseUnitOfWork : IUnitOfWork, IDisposable
     {
@@ -29,6 +29,11 @@ namespace Photography.Data.Bolts
         public IRepository<UserEntity> Users
         {
             get { return GetStandardRepo<UserEntity>(); }
+        }
+
+        public IRepository<ResetPasswordRequestEntity> ResetPasswordRequests
+        {
+            get { return GetStandardRepo<ResetPasswordRequestEntity>(); }
         }
 
         public IRepository<RoleEntity> Roles

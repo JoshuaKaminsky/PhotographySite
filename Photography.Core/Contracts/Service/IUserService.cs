@@ -12,7 +12,13 @@ namespace Photography.Core.Contracts.Service
         /// Retrieve a list of all users
         /// </summary>
         IEnumerable<User> GetUsers();
-        
+
+        /// <summary>
+        /// Retrieve a user by id
+        /// </summary>
+        /// <param name="userId">The users email address</param>
+        User GetUser(int userId);
+
         /// <summary>
         /// Retrieve a user
         /// </summary>

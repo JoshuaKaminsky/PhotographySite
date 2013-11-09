@@ -18,6 +18,11 @@ namespace Photography.Service.Bolts
             return Process.GetUsers();
         }
 
+        public User GetUser(int userId)
+        {
+            return Process.GetUserById(userId);
+        }
+
         public User GetUserByEmailAddress(string emailAddress)
         {
             return Process.GetUserByEmail(emailAddress);

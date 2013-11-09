@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using Photography.Core.Contracts.Process;
@@ -32,6 +33,11 @@ namespace Photography.Data.Bolts
                 throw new AuthenticationException("Invalid Password.");
 
             return user != null;
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return UnitOfWork.Users.GetAll().ToList().Select(user => user.ToModel());
         }
 
         public User GetUserById(int userId)
@@ -116,6 +122,20 @@ namespace Photography.Data.Bolts
             UnitOfWork.Commit();
 
             return true;
+        }
+
+        public ResetPasswordRequest ResetPassword(int userId)
+        {
+            var user = UnitOfWork.Users.GetById(userId);
+
+            var request = new ResetPasswordRequestEntity()
+                {
+                    CreatedOn = DateTime.UtcNow,
+                    Token = Guid.NewGuid(),
+                    User = user
+                };
+
+            return UnitOfWork.ResetPasswordRequests.Add(request).ToModel();
         }
 
         private static bool IsPasswordValid(string password, string salt, string hash)

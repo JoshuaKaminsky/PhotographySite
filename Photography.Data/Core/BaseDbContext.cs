@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Photography.Data.Entities;
 
-namespace Photography.Data
+namespace Photography.Data.Core
 {
     internal class BaseDbContext : DbContext
     {
@@ -11,17 +11,19 @@ namespace Photography.Data
         {
         }
 
-        public DbSet<RoleEntity> Roles { get; set; }
-
-        public DbSet<SessionEntity> Sessions { get; set; }
-
-        public DbSet<UserEntity> Users { get; set; }
-
         public DbSet<AlbumEntity> Albums { get; set; }
 
         public DbSet<PhotoEntity> Photos { get; set; }
 
+        public DbSet<ResetPasswordRequestEntity> ResetPasswordRequests { get; set; }
+
+        public DbSet<RoleEntity> Roles { get; set; }
+
+        public DbSet<SessionEntity> Sessions { get; set; }
+
         public DbSet<TagEntity> Tags { get; set; }
+
+        public DbSet<UserEntity> Users { get; set; }
 
         static BaseDbContext()
         {

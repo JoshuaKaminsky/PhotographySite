@@ -31,6 +31,7 @@ namespace Photography.Data.Extensions
                     Discount = dataModel.Discount,
                     EmailAddress = dataModel.EmailAddress,
                     Id = dataModel.Id,
+                    Name = dataModel.Name
                 };
         }
 
@@ -98,6 +99,21 @@ namespace Photography.Data.Extensions
                     Id = dataModel.Id,
                     Name = dataModel.Name
                 };
+        }
+
+        public static ResetPasswordRequest ToModel(this ResetPasswordRequestEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
+
+            return new ResetPasswordRequest
+            {
+                CreatedOn = dataModel.CreatedOn,
+                Id = dataModel.Id,
+                Token = dataModel.Token,
+                UsedOn = dataModel.UsedOn,
+                User = dataModel.User.ToModel()
+            };
         }
 
         public static UserEntity ToEntity(this User model)
