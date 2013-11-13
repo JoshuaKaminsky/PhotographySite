@@ -20,7 +20,7 @@ namespace Photography.Data.Entities
         public string EmailAddress { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public byte[] Password { get; set; }
 
         [Required]
         public string Salt { get; set; }

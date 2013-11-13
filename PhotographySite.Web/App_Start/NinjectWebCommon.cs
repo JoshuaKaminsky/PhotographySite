@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
 using Ninject.Modules;
 using Photography.Data.Bootstrap;
 using Photography.Service.Bootstrap;
-using PhotographySite.Web;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(PhotographySite.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(PhotographySite.App_Start.NinjectWebCommon), "Stop")]
@@ -50,10 +46,13 @@ namespace PhotographySite.App_Start
         private static IKernel CreateKernel()
         {
             var kernel = new StandardKernel();
+
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
+
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
             
             RegisterServices(kernel);
+
             return kernel;
         }
 
@@ -63,6 +62,8 @@ namespace PhotographySite.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IFilterProvider>().To<FilterAttributeFilterProvider>();
+
             kernel.Load(new List<INinjectModule> { new DataModule(), new ServiceModule() });
         }        
     }

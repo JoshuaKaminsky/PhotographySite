@@ -7,32 +7,51 @@ namespace Photography.Data.Extensions
 {
     internal static class ModelTranslator
     {
-        public static Session ToModel(this SessionEntity dataModel)
+        public static Album ToModel(this AlbumEntity dataModel)
         {
             if (dataModel == null)
                 return null;
 
-            return new Session
-                {
-                    CreatedOn = dataModel.CreatedOn,
-                    Id = dataModel.Id,
-                    SessionKey = dataModel.SessionKey,
-                    User = dataModel.User.ToModel()
-                };
+            return new Album
+            {
+                AlbumCover = dataModel.AlbumCover.ToModel(),
+                Category = dataModel.Category.ToModel(),
+                CreatedOn = dataModel.CreatedOn,
+                Description = dataModel.Description,
+                Id = dataModel.Id,
+                IsPublic = dataModel.IsPublic,
+                Name = dataModel.Name
+            };
         }
 
-        public static User ToModel(this UserEntity dataModel)
+        public static Category ToModel(this CategoryEntity dataModel)
         {
             if (dataModel == null)
                 return null;
 
-            return new User
-                {
-                    Discount = dataModel.Discount,
-                    EmailAddress = dataModel.EmailAddress,
-                    Id = dataModel.Id,
-                    Name = dataModel.Name
-                };
+            return new Category
+            {
+                Id = dataModel.Id,
+                Name = dataModel.Name
+            };
+        }
+
+        public static Photo ToModel(this PhotoEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
+
+            return new Photo()
+            {
+                CreatedOn = dataModel.CreatedOn,
+                Description = dataModel.Description,
+                Id = dataModel.Id,
+                IsPublic = dataModel.IsPublic,
+                Name = dataModel.Name,
+                Source = dataModel.Source,
+                Tags = dataModel.Tags.Select(ToModel),
+                ThumbnailSource = dataModel.ThumbnailSource
+            };
         }
 
         public static Role ToModel(this RoleEntity dataModel)
@@ -41,64 +60,10 @@ namespace Photography.Data.Extensions
                 return null;
 
             return new Role
-                {
-                    Id = dataModel.Id,
-                    Name = dataModel.Name
-                };
-        }
-
-        public static Photo ToModel(this PhotoEntity dataModel)
-        {
-            if (dataModel == null) 
-                return null;
-
-            return new Photo()
-                       {
-                           CreatedOn = dataModel.CreatedOn,
-                           Description = dataModel.Description,
-                           Id = dataModel.Id,
-                           IsPublic = dataModel.IsPublic,
-                           Name = dataModel.Name,
-                           Source = dataModel.Source,
-                           Tags = dataModel.Tags.Select(ToModel),
-                           ThumbnailSource = dataModel.ThumbnailSource
-                       };
-        }
-
-        public static Tag ToModel(this TagEntity dataModel)
-        {
-            if (dataModel == null) 
-                return null;
-
-            return new Tag { Description = dataModel.Description, Id = dataModel.Id, Name = dataModel.Name };
-        }
-        
-        public static Album ToModel(this AlbumEntity dataModel)
-        {
-            if (dataModel == null)
-                return null;
-
-            return new Album 
-                {   AlbumCover = dataModel.AlbumCover.ToModel(), 
-                    Category = dataModel.Category.ToModel(), 
-                    CreatedOn = dataModel.CreatedOn, 
-                    Description = dataModel.Description, 
-                    Id = dataModel.Id, 
-                    IsPublic = dataModel.IsPublic, 
-                    Name = dataModel.Name 
-                };
-        } 
-
-        public static Category ToModel(this CategoryEntity dataModel)
-        {
-            if (dataModel == null)
-                return null;
-
-            return new Category
-                {
-                    Id = dataModel.Id,
-                    Name = dataModel.Name
-                };
+            {
+                Id = dataModel.Id,
+                Name = dataModel.Name
+            };
         }
 
         public static ResetPasswordRequest ToModel(this ResetPasswordRequestEntity dataModel)
@@ -116,18 +81,42 @@ namespace Photography.Data.Extensions
             };
         }
 
-        public static UserEntity ToEntity(this User model)
+        public static Session ToModel(this SessionEntity dataModel)
         {
-            if (model == null)
+            if (dataModel == null)
                 return null;
 
-            return new UserEntity
-            {
-                Discount = model.Discount,
-                EmailAddress = model.EmailAddress,
-                Id = model.Id
-            };
+            return new Session
+                {
+                    CreatedOn = dataModel.CreatedOn,
+                    Id = dataModel.Id,
+                    SessionKey = dataModel.SessionKey,
+                    User = dataModel.User.ToModel()
+                };
         }
+
+        public static Tag ToModel(this TagEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
+
+            return new Tag { Description = dataModel.Description, Id = dataModel.Id, Name = dataModel.Name };
+        }
+
+        public static User ToModel(this UserEntity dataModel)
+        {
+            if (dataModel == null)
+                return null;
+
+            return new User
+                {
+                    Discount = dataModel.Discount,
+                    EmailAddress = dataModel.EmailAddress,
+                    Id = dataModel.Id,
+                    Name = dataModel.Name
+                };
+        }
+
 
         public static AlbumEntity ToEntity(this Album model)
         {
@@ -164,6 +153,21 @@ namespace Photography.Data.Extensions
                 };
         }
 
+        public static ResetPasswordRequestEntity ToEntity(this ResetPasswordRequest model)
+        {
+            if (model == null)
+                return null;
+
+            return new ResetPasswordRequestEntity()
+            {
+                CreatedOn = model.CreatedOn,
+                Id = model.Id,
+                Token = model.Token,
+                UsedOn = model.UsedOn,
+                UserId = model.User.Id
+            };
+        }
+
         public static TagEntity ToEntity(this Tag model)
         {
             if (model == null)
@@ -176,5 +180,20 @@ namespace Photography.Data.Extensions
                     Name = model.Name
                 };
         }
+
+        public static UserEntity ToEntity(this User model)
+        {
+            if (model == null)
+                return null;
+
+            return new UserEntity
+            {
+                Discount = model.Discount,
+                EmailAddress = model.EmailAddress,
+                Id = model.Id,
+                Name = model.Name
+            };
+        }
+        
     }
 }

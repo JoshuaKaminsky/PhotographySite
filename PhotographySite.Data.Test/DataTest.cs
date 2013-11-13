@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Photography.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Photography.Data.Bolts;
 using Photography.Data.Core;
 
@@ -14,7 +12,7 @@ namespace PhotographySite.Data.Test
         {
             var userProcess = new UserProcess(new BaseUnitOfWork(new RepositoryProvider(new RepositoryFactories())));
             
-            var user = userProcess.CreateUser("Josh Kaminsky", "JoshKaminsky@gmail.com", "p");
+            var user = userProcess.CreateUser("Josh Kaminsky", "JoshKaminsky@gmail.com", 0, "p");
 
             user.Discount = 95;
 

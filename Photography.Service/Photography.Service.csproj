@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,8 +42,11 @@
   <ItemGroup>
     <Compile Include="Bolts\AlbumService.cs" />
     <Compile Include="Bolts\BaseService.cs" />
+    <Compile Include="Bolts\FileSystemMailSender.cs" />
+    <Compile Include="Bolts\MailService.cs" />
     <Compile Include="Bolts\PhotoService.cs" />
     <Compile Include="Bolts\RoleService.cs" />
+    <Compile Include="Bolts\ServiceConfiguration.cs" />
     <Compile Include="Bolts\SessionService.cs" />
     <Compile Include="Bolts\TagService.cs" />
     <Compile Include="Bolts\UserService.cs" />
@@ -53,6 +57,9 @@
       <Project>{d21e6a9b-1193-4553-a692-a69a8a13c263}</Project>
       <Name>Photography.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

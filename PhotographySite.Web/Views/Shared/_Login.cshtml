@@ -1,54 +1,31 @@
-﻿<nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Brand</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        
-        @if (!Request.IsAuthenticated)
-        {
-            <!-- login -->
-            <form class="navbar-form navbar-right" role="login">
-                <div class="form-group ">
-                    <input type="text" class="form-control" placeholder="Email Address...">
-                </div>
-            
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Password...">
-                </div>
-
-                <button type="submit" class="btn btn-default">Log in</button>
-            </form>
-        }
-        
-        <!-- search -->
-        <form class="navbar-form navbar-right" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+﻿@if (ViewBag.Login == null || ViewBag.Login)
+{
+    if (!Request.IsAuthenticated)
+    {
+    <!-- login -->
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Login", "Account")';return false;">Log In</button>
+        </div>
+    </form>
+    
+    }
+    else
+    {
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <div class="btn-group">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                    @User.Identity.Name
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("UpdatePassword", "Account")">Reset Password</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+                </ul>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        
-        
-    </div>
-    <!-- /.navbar-collapse -->
-</nav>
-
-<script type="text/javascript">
-    $(function () {
-        // Setup drop down menu
-        $('.dropdown-toggle').dropdown();
-
-        // Fix input element click problem
-        $('.dropdown input, .dropdown label').click(function (e) {
-            e.stopPropagation();
-        });
-    });
-</script>
+        </div>
+    </form>
+    }
+}

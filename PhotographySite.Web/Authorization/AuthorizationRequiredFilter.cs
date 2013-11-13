@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Security;
+using Newtonsoft.Json;
 using Photography.Core.Contracts.Service;
+using PhotographySite.Models;
 
 namespace PhotographySite.Authorization
 {
@@ -19,35 +22,50 @@ namespace PhotographySite.Authorization
 
         public void OnAuthorization(AuthorizationContext filterContext)
         {
-            //pull the authentication information off the header and see if the user is logged in
-            //filterContext.HttpContext.Request.Headers
             int userId;
             Guid sessionId;
 
-            if (!ParseHeader(filterContext, out userId, out sessionId))
-            {
-                //redirect to the login page
-            }
-            else
-            {
-                //validate information
-                if (!_sessionService.ValidateSession(userId, sessionId))
-                {
-                    //redirect to login page
-                }
-                else
-                {
-                    //set the current user
-                }
-            }
+            //if (!ParseHeader(filterContext, out userId, out sessionId))
+            //{
+            //    FormsAuthentication.RedirectToLoginPage();
+            //}
+            //else
+            //{
+            //    if (!_sessionService.ValidateSession(userId, sessionId))
+            //    {
+            //        FormsAuthentication.RedirectToLoginPage();
+            //    }
+            //    else
+            //    {
+            //        var user = _userService.GetUser(userId);
+            //        var roles = _roleService.GetUserRoles(userId);
+
+            //        //check that the roles match the attribute
+            //    }
+            //}
 
         }
 
-        private bool ParseHeader(AuthorizationContext filterContext, out int userId, out Guid sessionId)
+        private static bool ParseHeader(ControllerContext context, out int userId, out Guid sessionId)
         {
-            userId = -1;
-            sessionId = Guid.NewGuid();
+            try
+            {
+                var authCookie = context.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+                var authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
+                var session = JsonConvert.DeserializeObject<SessionModel>(authTicket.UserData);
+
+                userId = session.UserId;
+                sessionId = session.SessionKey;
+            }
+            catch 
+            {
+                userId = -1;
+                sessionId = Guid.Empty;
+
+                return false;
+            }
+            
             return true;
         }
     }

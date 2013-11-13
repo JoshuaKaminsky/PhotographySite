@@ -18,8 +18,16 @@ namespace PhotographySite.Controllers
             return View(_userService.GetUsers());
         }
 
-        public ViewResult Details(int id)
+        public ActionResult Details(int id)
         {
+            var emailAddress = Request.LogonUserIdentity != null ? Request.LogonUserIdentity.Name : string.Empty;
+
+            var user = _userService.GetUserByEmailAddress(emailAddress);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             return View(_userService.GetUser(id));
         }
 
@@ -33,7 +41,7 @@ namespace PhotographySite.Controllers
         {
             if (ModelState.IsValid)
             {
-                _userService.CreateUser(user.Name, user.EmailAddress);
+                _userService.CreateUser(user.Name, user.EmailAddress, user.Discount);
                 
                 return RedirectToAction("Index");  
             }

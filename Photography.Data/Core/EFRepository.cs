@@ -28,12 +28,12 @@ namespace Photography.Data.Core
             return DbSet;
         }
 
-        public System.Collections.Generic.IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, System.Collections.Generic.List<string> includes = null)
+        public System.Collections.Generic.IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null)
         {
             return GetItems(filter, includes);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, System.Collections.Generic.List<string> includes = null)
+        public T Get(Expression<Func<T, bool>> filter, string[] includes = null)
         {
             return GetItems(filter, includes).SingleOrDefault();
         }
@@ -61,12 +61,20 @@ namespace Photography.Data.Core
         public virtual T Update(T entity)
         {
             var dbEntityEntry = DbContext.Entry(entity);
-            if (dbEntityEntry.State == EntityState.Detached)
+            if (dbEntityEntry.State != EntityState.Modified)
             {
-                DbSet.Attach(entity);
+                dbEntityEntry.State = EntityState.Modified;
             }
+            else
+            {
+                var set = DbContext.Set<T>();
+                var attachedEntity = set.Local.SingleOrDefault(local => local.Id == entity.Id); 
 
-            dbEntityEntry.State = EntityState.Modified;
+                if (attachedEntity != null)
+                {
+                    DbContext.Entry(attachedEntity).CurrentValues.SetValues(entity);
+                }
+            }
 
             return entity;
         }
@@ -98,7 +106,7 @@ namespace Photography.Data.Core
             return DbSet.SingleOrDefault(filter);
         }
 
-        private IQueryable<T> GetItems(Expression<Func<T, bool>> filter, System.Collections.Generic.List<string> includes = null)
+        private IQueryable<T> GetItems(Expression<Func<T, bool>> filter, string[] includes = null)
         {
             IQueryable<T> query = DbSet;
 
@@ -107,7 +115,7 @@ namespace Photography.Data.Core
                 query = query.Where(filter);
             }
 
-            if (includes != null && includes.Count > 0)
+            if (includes != null && includes.Length > 0)
             {
                 query = includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
             }

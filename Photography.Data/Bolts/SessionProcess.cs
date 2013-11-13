@@ -15,21 +15,32 @@ namespace Photography.Data.Bolts
         {
         }
 
-        public Session CreateSession(int userId)
+        public Session ResolveSession(int userId)
         {
             try
             {
-                var newSession = new SessionEntity
+                var session = UnitOfWork.Sessions.Get(entity => entity.UserId == userId);
+                if (session == null)
                 {
-                    CreatedOn = DateTime.Now,
-                    UserId = userId,
-                    SessionKey = Guid.NewGuid()
-                };
+                    session = new SessionEntity
+                    {
+                        CreatedOn = DateTime.UtcNow,
+                        UserId = userId,
+                        SessionKey = Guid.NewGuid()
+                    };
 
-                newSession = UnitOfWork.Sessions.Add(newSession);
+                    UnitOfWork.Sessions.Add(session);
+                }
+                else
+                {
+                    session.CreatedOn = DateTime.UtcNow;
+
+                    session = UnitOfWork.Sessions.Update(session);
+                }
+                
                 UnitOfWork.Commit();
 
-                return newSession.ToModel();
+                return session.ToModel();
             }
             catch (Exception exception)
             {
@@ -50,6 +61,24 @@ namespace Photography.Data.Bolts
                 Trace.TraceError(exception.ToString());
 
                 return null;
+            }
+        }
+
+        public bool InvalidateSession(int userId, Guid sessionKey)
+        {
+            try
+            {
+                var session = UnitOfWork.Sessions.Get(entity => entity.UserId == userId && entity.SessionKey == sessionKey);
+
+                return UnitOfWork.Sessions.Delete(session);
+            }
+            catch (Exception exception)
+            {
+                Trace.TraceError("Could not invalidate session for user with id {0} and session key {1}. {2}", userId, sessionKey, exception.Message);
+                Trace.TraceError(exception.ToString());
+
+                return false;
+                throw;
             }
         }
     }

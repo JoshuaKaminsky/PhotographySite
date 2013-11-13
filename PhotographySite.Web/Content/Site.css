@@ -76,3 +76,27 @@ textarea {
     border-left: 0px;
     background-color: #FFFFFF;
 }
+
+.input-prepend.input-block-level {
+  display: table;
+  width: 100%;
+}
+
+.input-prepend.input-block-level .add-on {
+  display: table-cell;
+  background-color: white;
+}
+
+.input-prepend.input-block-level > input {
+  box-sizing: border-box;
+  height: 30px;
+  display: table-cell;
+  width: 100%;
+  border-left-style: none;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
