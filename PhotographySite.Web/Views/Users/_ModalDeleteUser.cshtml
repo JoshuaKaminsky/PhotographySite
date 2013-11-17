@@ -1,0 +1,22 @@
+<!-- Delete Modal -->
+<div id="deleteMessage" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Delete User?</h4>
+            </div>
+           <form action="@Url.Action("Delete")" method="POST">
+                <div class="modal-body">
+                    Delete User?
+                    <input type="hidden" id="deleteUserId"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-warning" value="Delete" />
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

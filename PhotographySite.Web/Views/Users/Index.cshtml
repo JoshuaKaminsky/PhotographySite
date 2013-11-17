@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3>Users
@@ -38,12 +36,27 @@
                         @String.Format("{0:#0%}", item.Discount ?? 0)
                     </td>
                     <td>
-                        <a href="@Url.Action("ResetPassword", "Account", new { id = item.Id })" data-toggle="tooltip" title="reset password"><i class="fa fa-fw fa-refresh"></i></a>
-                        <a href="@Url.Action("Delete", new { id = item.Id })" data-toggle="tooltip" title="delete"><i class="fa fa-fw fa-trash-o"></i></a>
+                        <a data-id="@item.Id" data-toggle="modal" class="resetPasswordButton" title="reset password"><i class="fa fa-fw fa-refresh"></i></a>
+                        <a data-id="@item.Id" data-toggle="modal" class="deleteUserButton" title="delete"><i class="fa fa-fw fa-trash-o"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
-
     </table>
 </div>
+
+@Html.Partial("_ModalDeleteUser")
+@Html.Partial("_ModalResetPassword")
+
+@*@section scripts
+{
+    $(document).ready(function(){
+        $(".resetPasswordButton").click(function(){
+             $('#deleteUserId).val($(this).data('id'));
+        });
+
+        $(".deleteUserButton").click(function(){
+            $('#resetPasswordUserId).val($(this).data('id'));
+        });
+    });
+}*@
