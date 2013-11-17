@@ -1,9 +1,11 @@
 using System.Web.Mvc;
 using Photography.Core.Contracts.Service;
 using Photography.Core.Models;
+using PhotographySite.Authorization;
 
 namespace PhotographySite.Controllers
-{   
+{
+    [AuthorizationRequired(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
@@ -16,19 +18,6 @@ namespace PhotographySite.Controllers
         public ViewResult Index()
         {
             return View(_userService.GetUsers());
-        }
-
-        public ActionResult Details(int id)
-        {
-            var emailAddress = Request.LogonUserIdentity != null ? Request.LogonUserIdentity.Name : string.Empty;
-
-            var user = _userService.GetUserByEmailAddress(emailAddress);
-            if (user == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View(_userService.GetUser(id));
         }
 
         public ActionResult Create()
@@ -66,17 +55,16 @@ namespace PhotographySite.Controllers
             return View(user);
         }
 
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public bool ResetPassword(int id)
         {
-            return View(_userService.GetUser(id));
+            return _userService.ResetPasswordRequest(id);
         }
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [HttpPost]
+        public bool Delete(int id)
         {
-            _userService.DeleteUser(id);
-
-            return RedirectToAction("Index");
+            return _userService.DeleteUser(id);
         }
     }
 }

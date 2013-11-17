@@ -20,14 +20,17 @@
     </div>
 </nav>
 
-<script type="text/javascript">
-    $(function () {
-        // Setup drop down menu
-        $('.dropdown-toggle').dropdown();
+@*@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            // Setup drop down menu
+            $('.dropdown-toggle').dropdown();
 
-        // Fix input element click problem
-        $('.dropdown input, .dropdown label').click(function (e) {
-            e.stopPropagation();
+            // Fix input element click problem
+            $('.dropdown input, .dropdown label').click(function (e) {
+                e.stopPropagation();
+            });
         });
-    });
-</script>
+    </script>
+}*@

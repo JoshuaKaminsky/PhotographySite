@@ -1,28 +1,25 @@
 @model Photography.Core.Models.User
 
-@* This partial view defines form fields that will appear when creating and editing entities *@
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Name)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Name)
-    @Html.ValidationMessageFor(model => model.Name)
+<div class="form-group">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+        <input id="name" name="Name" type="text" class="form-control" placeholder="name..." required value="@Model.Name">
+    </div>
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.EmailAddress)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.EmailAddress)
-    @Html.ValidationMessageFor(model => model.EmailAddress)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Discount)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Discount)
-    @Html.ValidationMessageFor(model => model.Discount)
+<div class="form-group">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i></span>
+        <input id="email" name="EmailAddress" type="email" class="form-control" placeholder="email..." required value="@Model.EmailAddress">
+    </div>
 </div>
 
+<div class="form-group">
+    <label for="discount">Discount</label>
+    
+    <div class="input-group">
+        <input id="discount" name="Discount" type="text" data-slider-min="0" data-slider-max="1" data-slider-step=".05" 
+               value="@Model.Discount" data-slider-orientation="horizontal" data-slider-selection="after"
+               data-slider-tooltip="discount" class="slider" placeholder="discount...">
+    </div>
+</div>

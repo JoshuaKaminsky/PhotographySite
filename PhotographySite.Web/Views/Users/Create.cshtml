@@ -1,27 +1,20 @@
 @model Photography.Core.Models.User
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create Usser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+<form action="@Url.Action("Create")" method="POST">
     <fieldset>
         <legend>User</legend>
 
-		@Html.Partial("_CreateOrEdit", Model)
+		@Html.Partial("_CreateOrEdit", Model ?? new Photography.Core.Models.User())
+        
+        <a href="@Url.Action("Index")" class="btn btn-info pull-left">Back</a>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <input type="submit" value="Create" class="btn btn-default pull-right"/>
     </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</form>
 
 

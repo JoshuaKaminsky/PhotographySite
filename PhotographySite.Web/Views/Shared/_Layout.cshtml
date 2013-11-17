@@ -19,6 +19,16 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/bootstrap")
+
         @RenderSection("scripts", required: false)
+        
+        <script type="text/javascript">
+            $(function () {
+                $('.slider').slider();
+                $('[data-toggle="tooltip"]').tooltip({
+                    'placement': 'bottom'
+                });
+            });
+        </script>
     </body>
 </html>
