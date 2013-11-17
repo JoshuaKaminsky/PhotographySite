@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Photography.Data.Entities;
 
-namespace Photography.Data
+namespace Photography.Data.Core
 {
     internal class BaseDbContext : DbContext
     {
@@ -11,17 +11,19 @@ namespace Photography.Data
         {
         }
 
-        public DbSet<RoleEntity> Roles { get; set; }
-
-        public DbSet<SessionEntity> Sessions { get; set; }
-
-        public DbSet<UserEntity> Users { get; set; }
-
         public DbSet<AlbumEntity> Albums { get; set; }
 
         public DbSet<PhotoEntity> Photos { get; set; }
 
+        public DbSet<ResetPasswordRequestEntity> ResetPasswordRequests { get; set; }
+
+        public DbSet<RoleEntity> Roles { get; set; }
+
+        public DbSet<SessionEntity> Sessions { get; set; }
+
         public DbSet<TagEntity> Tags { get; set; }
+
+        public DbSet<UserEntity> Users { get; set; }
 
         static BaseDbContext()
         {
@@ -34,8 +36,8 @@ namespace Photography.Data
                 .WithMany(photo => photo.Albums)
                 .Map(map =>
                     {
-                        map.MapLeftKey("PhotoId");
-                        map.MapRightKey("AlbumId");
+                        map.MapLeftKey("AlbumId");
+                        map.MapRightKey("PhotoId");
                         map.ToTable("PhotoAlbum");
                     });
 
@@ -80,8 +82,8 @@ namespace Photography.Data
                     });
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
 }

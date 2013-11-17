@@ -4,7 +4,7 @@ using System.Data.Entity;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 
-namespace Photography.Data.Bolts
+namespace Photography.Data.Core
 {
     /// <summary>
     /// Provides an <see cref="IRepository{T}"/> for a client request.

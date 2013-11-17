@@ -9,16 +9,18 @@ namespace Photography.Data.Contracts
 
         void Rollback();
 
-        IRepository<UserEntity> Users { get; }
+        IRepository<AlbumEntity> Albums { get; }
+
+        IRepository<PhotoEntity> Photos { get; }
+        
+        IRepository<ResetPasswordRequestEntity> ResetPasswordRequests { get; }
 
         IRepository<RoleEntity> Roles { get; }
 
         IRepository<SessionEntity> Sessions { get; }
 
-        IRepository<AlbumEntity> Albums { get; }
-
-        IRepository<PhotoEntity> Photos { get; }
-
         IRepository<TagEntity> Tags { get; }
+
+        IRepository<UserEntity> Users { get; }
     }
 }

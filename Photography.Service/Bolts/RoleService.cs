@@ -1,6 +1,5 @@
 ﻿using Photography.Core.Contracts.Process;
 using Photography.Core.Contracts.Service;
-using System;
 using System.Collections.Generic;
 using Photography.Core.Models;
 
@@ -15,22 +14,22 @@ namespace Photography.Service.Bolts
 
         public IEnumerable<Role> GetRoles()
         {
-            throw new NotImplementedException();
+            return Process.GetRoles();
         }
 
-        public IEnumerable<Role> GetUseRoles(int userId)
+        public IEnumerable<Role> GetUserRoles(int userId)
         {
-            throw new NotImplementedException();
+            return Process.GetUserRoles(userId);
         }
 
         public Role CreateRole(string roleName)
         {
-            throw new NotImplementedException();
+            return Process.CreateRole(roleName);
         }
 
         public User AddUserToRole(int userId, int roleId)
         {
-            throw new NotImplementedException();
+            return Process.AddUserToRole(userId, roleId);
         }
     }
 }

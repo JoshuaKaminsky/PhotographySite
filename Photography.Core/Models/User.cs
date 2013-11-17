@@ -6,6 +6,6 @@
 
         public string EmailAddress { get; set; }
 
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
     }
 }

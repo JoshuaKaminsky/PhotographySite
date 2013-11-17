@@ -1,5 +1,5 @@
 6/29:
-think about a dependency injection i want to use
+think about a dependency injection i want to use - ninject
 finish data methods - session and role implementations
 x download git hub
 
@@ -14,4 +14,25 @@ process = what we use to make these calls to the db, userprocess contains a unit
 newSession = _unitOfWork.Sessions.Add(newSession);
 ^  unit of work has all of your tables, it's saying add a new session to that table, it does all the sql magic, that's the entity framework / orm magic
 - some core models will be extended to use for the view, like if you had an extra checkbox or something
+default db connection string: <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-PhotographySite-20130531174829;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-PhotographySite-20130531174829.mdf" />
 
+9/8:
+- for next time create login page: username, password, forgot password link (use razor syntax - use @ instead of <% %>, lots of HTML helpers if do HTML. see the methods, which generate html for you)
+- put link on main page to login page
+
+10/5:
+bootstrapper - takes the interface and matches it with a concrete implementation of it, so that when we inject an interface with it, it knows to get that concrete implementation
+interface for the process is a definition saying that something has these methods, and the actual class has the implementation for the methods. The interface is like the skeleton and the process is the class that implements it so if you wanted to test something without using real connections, you could use the same interface but a different process that has mock connections.
+service - is what the website calls, does other stuff besides database interaction
+
+toModel = translating entity to a core model
+** next time we will do front end stuff!
+** finish my AlbumProcess, create Services in Photography.Service > Bolts, add to Bootstrapper
+
+10/13:
+- Need to think about paging for the search results
+
+11/9:
+- Think about using: Single page application frameworks - Angular, Ember, etc to load all the views on one page as divs and make the UI faster
+- Knockout - does data binding on the front side, like deletes things from lists automatically for you etc
+- Seeder - quick way to generate test data, on the VS side it will create data based off your classes and insert into the db

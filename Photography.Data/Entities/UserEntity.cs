@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Photography.Data.Entities
@@ -12,15 +13,19 @@ namespace Photography.Data.Entities
             Roles = new List<RoleEntity>();
         }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string EmailAddress { get; set; }
 
-        public string Password { get; set; }
+        [Required]
+        public byte[] Password { get; set; }
 
+        [Required]
         public string Salt { get; set; }
 
-        public decimal Discount { get; set; }
+        public decimal? Discount { get; set; }
 
         public virtual ICollection<RoleEntity> Roles { get; set; }
 

@@ -1,0 +1,20 @@
+@model Photography.Core.Models.User
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>User</legend>
+
+        @Html.HiddenFor(model => model.Id)
+		@Html.Partial("_CreateOrEdit", Model)
+        
+        <a href="@Url.Action("Index")" class="btn btn-info pull-left">Back</a>
+
+        <input type="submit" value="Save" class="btn btn-default pull-right"/>
+    </fieldset>
+}

@@ -1,4 +1,6 @@
-﻿using Photography.Core.Models;
+﻿using System;
+using System.Collections.Generic;
+using Photography.Core.Models;
 
 namespace Photography.Core.Contracts.Service
 {
@@ -7,6 +9,17 @@ namespace Photography.Core.Contracts.Service
     /// </summary>
     public interface IUserService : IService
     {
+        /// <summary>
+        /// Retrieve a list of all users
+        /// </summary>
+        IEnumerable<User> GetUsers();
+
+        /// <summary>
+        /// Retrieve a user by id
+        /// </summary>
+        /// <param name="userId">The users email address</param>
+        User GetUser(int userId);
+
         /// <summary>
         /// Retrieve a user
         /// </summary>
@@ -27,9 +40,20 @@ namespace Photography.Core.Contracts.Service
         /// </summary>
         /// <param name="name">The users name</param>
         /// <param name="emailAddress">The users email address</param>
+        /// <param name="discount"> The discount for the user</param>
         /// <param name="password">The users password</param>
         /// <returns>The created user</returns>
-        User CreateUser(string name, string emailAddress, string password);
+        User CreateUser(string name, string emailAddress, decimal? discount, string password);
+
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="name">The users name</param>
+        /// <param name="emailAddress">The users email address</param>
+        /// <param name="discount">The user discount</param>
+        /// <returns>The created user</returns>
+        /// <remarks> Will create a default password and email the user </remarks>
+        User CreateUser(string name, string emailAddress, decimal? discount);
 
         /// <summary>
         /// Delete a user from the system
@@ -51,8 +75,16 @@ namespace Photography.Core.Contracts.Service
         /// <param name="userId">The id of the user</param>
         /// <param name="oldPassword">The users old password</param>
         /// <param name="newPassword">The users new password</param>
-        /// <returns></returns>
+        /// <returns>True if successful </returns>
         bool UpdatePassword(int userId, string oldPassword, string newPassword);
+
+        /// <summary>
+        /// Reset a users password to something new
+        /// </summary>
+        /// <param name="userId"> The id of the user </param>
+        /// <param name="newPassword"> The new password </param>
+        /// <returns> True if successful </returns>
+        bool ResetPassword(int userId, string newPassword);
 
         /// <summary>
         /// Reset a users password
@@ -60,8 +92,14 @@ namespace Photography.Core.Contracts.Service
         /// <param name="userId">The id of the user</param>
         /// <returns>The new password</returns>
         /// <remarks>This is for internal/admin user only</remarks>
-        string ResetPassword(int userId);
+        bool ResetPasswordRequest(int userId);
 
-
+        /// <summary>
+        /// Validate a password reset request
+        /// </summary>
+        /// <param name="userId"> The user id </param>
+        /// <param name="token"> The password reset token </param>
+        /// <returns> True if valid </returns>
+        bool ValidatePasswordReset(int userId, Guid token);
     }
 }

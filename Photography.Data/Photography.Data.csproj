@@ -49,10 +49,10 @@
     <Compile Include="Bolts\PhotoProcess.cs" />
     <Compile Include="Bolts\RoleProcess.cs" />
     <Compile Include="Bolts\SessionProcess.cs" />
-    <Compile Include="BaseDbContext.cs" />
-    <Compile Include="Bolts\BaseUnitOfWork.cs" />
-    <Compile Include="Bolts\EFRepository.cs" />
-    <Compile Include="Bolts\RepositoryProvider.cs" />
+    <Compile Include="Core\BaseDbContext.cs" />
+    <Compile Include="Core\BaseUnitOfWork.cs" />
+    <Compile Include="Core\EFRepository.cs" />
+    <Compile Include="Core\RepositoryProvider.cs" />
     <Compile Include="Bolts\TagProcess.cs" />
     <Compile Include="Bolts\UserProcess.cs" />
     <Compile Include="Entities\AlbumEntity.cs" />
@@ -62,13 +62,14 @@
     <Compile Include="Contracts\IUnitOfWork.cs" />
     <Compile Include="Entities\CategoryEntity.cs" />
     <Compile Include="Entities\PhotoEntity.cs" />
+    <Compile Include="Entities\ResetPasswordRequestEntity.cs" />
     <Compile Include="Entities\RoleEntity.cs" />
     <Compile Include="Entities\SessionEntity.cs" />
     <Compile Include="Entities\TagEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Extensions\ModelTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositoryFactories.cs" />
+    <Compile Include="Core\RepositoryFactories.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Photography.Core\Photography.Core.csproj">

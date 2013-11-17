@@ -2,6 +2,7 @@
 using Photography.Core.Contracts.Process;
 using Photography.Data.Bolts;
 using Photography.Data.Contracts;
+using Photography.Data.Core;
 
 namespace Photography.Data.Bootstrap
 {
@@ -12,7 +13,6 @@ namespace Photography.Data.Bootstrap
             Bind<IAlbumProcess>().To<AlbumProcess>();
             Bind<IPhotoProcess>().To<PhotoProcess>();
             Bind<ITagProcess>().To<TagProcess>();
-
 
             Bind<IRoleProcess>().To<RoleProcess>();
             Bind<ISessionProcess>().To<SessionProcess>();

@@ -19,7 +19,7 @@ namespace Photography.Core.Contracts.Service
         /// </summary>
         /// <param name="userId">The id of the user</param>
         /// <returns>A list of roles that the user belongs to</returns>
-        IEnumerable<Role> GetUseRoles(int userId);
+        IEnumerable<Role> GetUserRoles(int userId);
         
         /// <summary>
         /// Create a role

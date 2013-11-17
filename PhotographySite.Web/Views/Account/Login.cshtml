@@ -1,21 +1,37 @@
-﻿@model PhotographySite.Models.Account
+﻿@model PhotographySite.Models.LoginModel
 
 @{
     ViewBag.Title = "Login";
+    ViewBag.Login = false;
 }
 
 <h2>Login</h2>
 
-<form  method="POST">
-    <div>
-        @Html.LabelFor(model => model.EmailAddress)
-        @Html.TextBoxFor(model => model.EmailAddress)
+<form action="@Url.Action("Login")" method="POST">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o"></i></span>
+            <input id="loginEmail" name="EmailAddress" type="text" class="form-control" placeholder="email..." required>
+        </div>
     </div>
 
-    <div>
-        @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password)
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-fw fa-key"></i></span>
+            <input id="loginPassword" name="Password" type="password" class="form-control" placeholder="password..." required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="checkbox">
+            <label for="RememberMe">
+                <input id="RememberMe" name="RememberMe" type="checkbox" value="true" checked="checked" />
+                Remember Me
+            </label>
+        </div>
     </div>
     
-    <button type="submit">Login</button>
+    <input type="hidden" id="ReturnUrl" name="ReturnUrl" value="@Model.ReturnUrl"/>
+
+    <button type="submit" class="btn btn-default pull-right">Log in</button>
 </form>

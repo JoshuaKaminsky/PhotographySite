@@ -10,9 +10,9 @@ namespace Photography.Data.Contracts
     {
         IQueryable<T> GetAll();
 
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, List<string> includes = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null);
 
-        T Get(Expression<Func<T, bool>> filter, List<string> includes = null);
+        T Get(Expression<Func<T, bool>> filter, string[] includes = null);
 
         T GetById(int id);
 

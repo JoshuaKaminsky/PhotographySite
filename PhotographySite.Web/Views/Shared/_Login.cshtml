@@ -1,0 +1,31 @@
+﻿@if (ViewBag.Login == null || ViewBag.Login)
+{
+    if (!Request.IsAuthenticated)
+    {
+    <!-- login -->
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("Login", "Account")';return false;">Log In</button>
+        </div>
+    </form>
+    
+    }
+    else
+    {
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <div class="btn-group">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+                    @User.Identity.Name
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="@Url.Action("UpdatePassword", "Account")">Reset Password</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li><a href="@Url.Action("LogOff", "Account")">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    }
+}

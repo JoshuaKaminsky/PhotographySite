@@ -15,6 +15,9 @@ namespace Photography.Service.Bootstrap
             Bind<IRoleService>().To<RoleService>();
             Bind<ISessionService>().To<SessionService>();
             Bind<IUserService>().To<UserService>();
+
+            Bind<IMailService>().To<FileSystemMailSender>();
+            Bind<IConfiguration>().To<ServiceConfiguration>();
         }
     }
 }

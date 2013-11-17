@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using Photography.Core.Contracts.Process;
@@ -24,7 +25,7 @@ namespace Photography.Data.Bolts
 
         public bool ValidateUser(string emailAddress, string password)
         {
-            var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new List<string> { "Roles" });
+            var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new[] { "Roles" });
             if (user == null)
                 throw new AuthenticationException("Invalid Username.");
 
@@ -32,6 +33,11 @@ namespace Photography.Data.Bolts
                 throw new AuthenticationException("Invalid Password.");
 
             return user != null;
+        }
+
+        public IEnumerable<User> GetUsers()
+        {
+            return UnitOfWork.Users.GetAll().ToList().Select(user => user.ToModel());
         }
 
         public User GetUserById(int userId)
@@ -64,7 +70,7 @@ namespace Photography.Data.Bolts
             }
         }
 
-        public User CreateUser(string name, string emailAddress, string password)
+        public User CreateUser(string name, string emailAddress, decimal? discount, string password)
         {
             var oldUser = UnitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
             if (oldUser != null)
@@ -76,10 +82,11 @@ namespace Photography.Data.Bolts
 
             var newUser = new UserEntity
             {
+                Discount = discount,
+                EmailAddress = emailAddress,
                 Name = name,
                 Password = passwordHash,
                 Salt = salt,
-                EmailAddress = emailAddress
             };
 
             newUser.Roles.Add(assessorRole);
@@ -92,12 +99,28 @@ namespace Photography.Data.Bolts
 
         public bool DeleteUser(int userId)
         {
-            return UnitOfWork.Users.GetById(userId) == null || UnitOfWork.Users.Delete(userId);
+            var user = UnitOfWork.Users.GetById(userId);
+            if (user == null)
+                return true;
+
+            UnitOfWork.Users.Delete(userId);
+            UnitOfWork.Commit();
+
+            return true;
         }
 
         public User UpdateUser(User user)
         {
-            return UnitOfWork.Users.Update(user.ToEntity()).ToModel();
+            var entity = UnitOfWork.Users.GetById(user.Id);
+
+            entity.Discount = user.Discount;
+            entity.EmailAddress = user.EmailAddress;
+            entity.Name = user.Name;
+
+            UnitOfWork.Users.Update(entity);
+            UnitOfWork.Commit();
+
+            return user;
         }
 
         public bool UpdatePassword(int userId, string oldPassword, string newPassword)
@@ -118,16 +141,68 @@ namespace Photography.Data.Bolts
             return true;
         }
 
-        private static bool IsPasswordValid(string password, string salt, string hash)
+        public bool UpdatePassword(int userId, string newPassword)
+        {
+            var user = UnitOfWork.Users.GetById(userId);
+            if (user == null)
+                throw new DataException(String.Format("User with Id {0} does not exist", userId));
+
+            user.Salt = CreateSalt();
+            user.Password = GetPasswordHash(newPassword, user.Salt);
+
+            UnitOfWork.Users.Update(user);
+            UnitOfWork.Commit();
+
+            return true;
+        }
+
+        public ResetPasswordRequest ResetPassword(int userId)
+        {
+            var user = UnitOfWork.Users.GetById(userId);
+
+            var request = new ResetPasswordRequestEntity()
+                {
+                    CreatedOn = DateTime.UtcNow,
+                    Token = Guid.NewGuid(),
+                    User = user
+                };
+
+            UnitOfWork.ResetPasswordRequests.Add(request).ToModel();
+            UnitOfWork.Commit();
+
+            return request.ToModel();
+        }
+
+        public ResetPasswordRequest GetPasswordResetRequest(int userId, Guid token)
+        {
+            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId, new[] {"User"});
+            if (request == null)
+            {
+                throw new DataException(string.Format("Could not find password reset request with token {0}.", token));
+            }
+
+            return request.ToModel();
+        }
+
+        public bool ExpirePasswordResetRequest(ResetPasswordRequest request)
+        {
+            request.UsedOn = DateTime.UtcNow;
+
+            UnitOfWork.ResetPasswordRequests.Update(request.ToEntity());
+
+            return true;
+        }
+
+        private static bool IsPasswordValid(string password, string salt, byte[] hash)
         {
             var passwordHash = GetPasswordHash(password, salt);
 
-            return passwordHash.Equals(hash);
+            return passwordHash.SequenceEqual(hash);
         }
 
-        internal static string GetPasswordHash(string password, string salt)
+        internal static byte[] GetPasswordHash(string password, string salt)
         {
-            return Encoding.UTF8.GetString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(password + salt)));
+            return new SHA256Managed().ComputeHash(Encoding.Unicode.GetBytes(password + salt));
         }
 
         internal static string CreateSalt()

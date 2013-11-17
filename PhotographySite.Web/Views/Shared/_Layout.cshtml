@@ -8,12 +8,27 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/bootstrap/base")
     @Styles.Render("~/Content/bootstrap/theme")
-</head>
-<body>
-    @RenderBody()
+</head> 
+    <body>
+        @Html.Partial("_Header")
+        
+        <div class="container">
+            @RenderBody()
+        </div>
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/knockout")
+        @Scripts.Render("~/bundles/bootstrap")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderSection("scripts", required: false)
+        
+        <script type="text/javascript">
+            $(function () {
+                $('.slider').slider();
+                $('[data-toggle="tooltip"]').tooltip({
+                    'placement': 'bottom'
+                });
+            });
+        </script>
+    </body>
 </html>

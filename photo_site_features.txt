@@ -10,8 +10,12 @@ Administrator
 - Create user accounts, set expiration date? set password?
 - Manage discount groups, apply discounts to users
 -> possibly make discounts more flexible, like shots are free but pay for prints, etc
-- Upload pictures, associate to user account
+- Upload pictures
 - Choose pics from albums to display on Samples page
+- Albums: either upload new pics or add from existing albums
+
+-> keep in mind, when deleting photos from album, if it's the last album with that photo, delete actual photo, not just association
+-> later we can add in ajax call for when pages are loading
 
 Users:
 - log in
@@ -20,3 +24,7 @@ Users:
 General:
 - display watermark over images? prevent right clicking
 
+Cool Featurers:
+- tags (create on the fly for photos & albums... user starts typing in words and the interface will automatically fill out with existing tags, or create new ones if they do not already exist)
+-->  have a button for albums "Add Tags to Photos"
+--> page that shows all tags and delete typos? or just make it harder to create, like create upon clicking "Add" instead of when they hit enter

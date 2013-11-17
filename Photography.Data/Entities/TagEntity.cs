@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Photography.Data.Entities
@@ -12,6 +13,7 @@ namespace Photography.Data.Entities
             Photos = new List<PhotoEntity>();
         }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }

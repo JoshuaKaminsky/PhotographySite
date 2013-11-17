@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Photography.Data.Entities
@@ -13,20 +14,30 @@ namespace Photography.Data.Entities
             Photos = new List<PhotoEntity>();
             Users = new List<UserEntity>();
         }
+
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
 
         [ForeignKey("AlbumCoverId")]
         public virtual PhotoEntity AlbumCover { get; set; }
+<<<<<<< HEAD
         public int? AlbumCoverId { get; set; }
+=======
+        [Required]
+        public int AlbumCoverId { get; set; }
+>>>>>>> ce6bd751620d353e28d0f7ef3d5e01fffb0522fa
 
         [ForeignKey("CategoryId")]
         public virtual CategoryEntity Category { get; set; }
+        [Required]
         public int CategoryId { get; set; }
 
+        [Required]
         public bool IsPublic { get; set; }
 
+        [Required]
         public DateTime CreatedOn { get; set; }
 
         public virtual ICollection<TagEntity> Tags { get; set; }

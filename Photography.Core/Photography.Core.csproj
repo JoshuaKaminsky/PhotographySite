@@ -47,6 +47,8 @@
     <Compile Include="Contracts\Process\ITagProcess.cs" />
     <Compile Include="Contracts\Process\IUserProcess.cs" />
     <Compile Include="Contracts\Service\IAlbumService.cs" />
+    <Compile Include="Contracts\Service\IConfiguration.cs" />
+    <Compile Include="Contracts\Service\IMailService.cs" />
     <Compile Include="Contracts\Service\IPhotoService.cs" />
     <Compile Include="Contracts\Service\IRoleService.cs" />
     <Compile Include="Contracts\Service\IService.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ResetPasswordRequest.cs" />
     <Compile Include="Models\SearchCriteria.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Role.cs" />
