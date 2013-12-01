@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -61,7 +60,7 @@ namespace Photography.Data.Core
         public virtual T Update(T entity)
         {
             var dbEntityEntry = DbContext.Entry(entity);
-            if (dbEntityEntry.State != EntityState.Modified)
+            if (dbEntityEntry.State != EntityState.Modified && dbEntityEntry.State != EntityState.Detached)
             {
                 dbEntityEntry.State = EntityState.Modified;
             }
