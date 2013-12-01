@@ -7,8 +7,6 @@ namespace Photography.Data.Entities
     [Table("ResetPasswordRequest")]
     internal class ResetPasswordRequestEntity : BaseEntity
     {
-        [ForeignKey("UserId")]
-        public virtual UserEntity User { get; set; }
         [Required]
         public int UserId { get; set; }
 

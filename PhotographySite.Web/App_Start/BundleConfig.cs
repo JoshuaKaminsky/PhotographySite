@@ -12,6 +12,7 @@ namespace PhotographySite.Web
                 "~/Scripts/knockout-2.2.0.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery")
+                            .Include("~/Scripts/jquery.tablesorter.js")
                             .Include("~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(

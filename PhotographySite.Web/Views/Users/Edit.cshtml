@@ -9,7 +9,7 @@
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>User</legend>
-
+        
         @Html.HiddenFor(model => model.Id)
 		@Html.Partial("_CreateOrEdit", Model)
         

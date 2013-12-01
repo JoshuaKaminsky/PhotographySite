@@ -108,3 +108,23 @@ textarea {
 .table td {
     text-align: center;
 }
+
+.table tbody > tr > td {
+    vertical-align: middle !important;
+}
+
+.block {
+  text-align: center;
+}
+ 
+.block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+}

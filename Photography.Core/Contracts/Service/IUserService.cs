@@ -56,13 +56,6 @@ namespace Photography.Core.Contracts.Service
         User CreateUser(string name, string emailAddress, decimal? discount);
 
         /// <summary>
-        /// Delete a user from the system
-        /// </summary>
-        /// <param name="userId">The id of the user to delete</param>
-        /// <returns>True if the user was deleted, otherwise false</returns>
-        bool DeleteUser(int userId);
-
-        /// <summary>
         /// Update a user
         /// </summary>
         /// <param name="user">The user information to update</param>

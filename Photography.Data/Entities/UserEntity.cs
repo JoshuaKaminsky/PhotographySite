@@ -27,6 +27,8 @@ namespace Photography.Data.Entities
 
         public decimal? Discount { get; set; }
 
+        public bool IsActive { get; set; }
+
         public virtual ICollection<RoleEntity> Roles { get; set; }
 
         public virtual ICollection<AlbumEntity> Albums { get; set; }

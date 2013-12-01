@@ -56,15 +56,35 @@ namespace PhotographySite.Controllers
         }
 
         [HttpPost]
-        public bool ResetPassword(int id)
+        public ActionResult ResetPassword(int id)
         {
-            return _userService.ResetPasswordRequest(id);
+            _userService.ResetPasswordRequest(id);
+            
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public bool Delete(int id)
+        public ActionResult Disable(int id)
         {
-            return _userService.DeleteUser(id);
+            var user = _userService.GetUser(id);
+
+            user.IsActive = false;
+
+             _userService.UpdateUser(user);
+             
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Enable(int id)
+        {
+            var user = _userService.GetUser(id);
+
+            user.IsActive = true;
+
+            _userService.UpdateUser(user);
+            
+            return RedirectToAction("Index");
         }
     }
 }

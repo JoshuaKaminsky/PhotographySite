@@ -77,7 +77,7 @@ namespace Photography.Data.Extensions
                 Id = dataModel.Id,
                 Token = dataModel.Token,
                 UsedOn = dataModel.UsedOn,
-                User = dataModel.User.ToModel()
+                UserId = dataModel.UserId
             };
         }
 
@@ -113,6 +113,7 @@ namespace Photography.Data.Extensions
                     Discount = dataModel.Discount,
                     EmailAddress = dataModel.EmailAddress,
                     Id = dataModel.Id,
+                    IsActive = dataModel.IsActive,
                     Name = dataModel.Name
                 };
         }
@@ -164,7 +165,7 @@ namespace Photography.Data.Extensions
                 Id = model.Id,
                 Token = model.Token,
                 UsedOn = model.UsedOn,
-                UserId = model.User.Id
+                UserId = model.UserId
             };
         }
 
@@ -191,6 +192,7 @@ namespace Photography.Data.Extensions
                 Discount = model.Discount,
                 EmailAddress = model.EmailAddress,
                 Id = model.Id,
+                IsActive = model.IsActive,
                 Name = model.Name
             };
         }

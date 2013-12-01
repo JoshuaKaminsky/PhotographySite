@@ -4,7 +4,7 @@ namespace Photography.Core.Models
 {
     public class ResetPasswordRequest : BaseModel
     {
-        public User User { get; set; }
+        public int UserId { get; set; }
 
         public Guid Token { get; set; }
 

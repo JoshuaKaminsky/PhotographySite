@@ -16,8 +16,6 @@ namespace Photography.Core.Contracts.Process
 
         User CreateUser(string name, string emailAddress, decimal? discount, string password);
 
-        bool DeleteUser(int userId);
-
         User UpdateUser(User user);
 
         bool UpdatePassword(int userId, string oldPassword, string newPassword);

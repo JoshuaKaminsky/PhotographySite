@@ -52,11 +52,6 @@ namespace Photography.Service.Bolts
             return user;
         }
 
-        public bool DeleteUser(int userId)
-        {
-            return Process.DeleteUser(userId);
-        }
-
         public User UpdateUser(User user)
         {
             return Process.UpdateUser(user);
@@ -74,15 +69,17 @@ namespace Photography.Service.Bolts
 
         public bool ResetPasswordRequest(int userId)
         {
+            var user = Process.GetUserById(userId);
+
             var request = Process.ResetPassword(userId);
 
             //send the email for resetting a password
-            var @from = "me";
+            var @from = "support@photosite.com";
             var subject = "Password Reset Request";
-            var url = string.Format("Account/ResetPassword/?userId={0}&token={1}", request.User.Id, request.Token);
-            var body = string.Format("Dear {0}, \nplease use the following link to sign in and change your password.  \n{1}", request.User.Name, url);
+            var url = string.Format("Account/ResetPassword/?userId={0}&token={1}", request.UserId, request.Token);
+            var body = string.Format("Dear {0}, \nplease use the following link to sign in and change your password.  \n{1}", user.Name, url);
             
-            return _mailService.SendEmail(@from, request.User.EmailAddress, subject, body);
+            return _mailService.SendEmail(@from, user.EmailAddress, subject, body);
         }
 
         public bool ValidatePasswordReset(int userId, Guid token)

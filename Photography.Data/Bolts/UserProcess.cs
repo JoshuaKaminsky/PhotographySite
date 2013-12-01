@@ -75,6 +75,7 @@ namespace Photography.Data.Bolts
             var oldUser = UnitOfWork.Users.Get(user => user.EmailAddress.Equals(emailAddress));
             if (oldUser != null)
                 throw new DataException("Email address already exists.");
+
             var assessorRole = UnitOfWork.Roles.Get(role => role.Name.Equals("guest", StringComparison.InvariantCultureIgnoreCase));
 
             var salt = CreateSalt();
@@ -97,18 +98,6 @@ namespace Photography.Data.Bolts
             return newUser.ToModel();
         }
 
-        public bool DeleteUser(int userId)
-        {
-            var user = UnitOfWork.Users.GetById(userId);
-            if (user == null)
-                return true;
-
-            UnitOfWork.Users.Delete(userId);
-            UnitOfWork.Commit();
-
-            return true;
-        }
-
         public User UpdateUser(User user)
         {
             var entity = UnitOfWork.Users.GetById(user.Id);
@@ -116,6 +105,7 @@ namespace Photography.Data.Bolts
             entity.Discount = user.Discount;
             entity.EmailAddress = user.EmailAddress;
             entity.Name = user.Name;
+            entity.IsActive = user.IsActive;
 
             UnitOfWork.Users.Update(entity);
             UnitOfWork.Commit();
@@ -158,13 +148,11 @@ namespace Photography.Data.Bolts
 
         public ResetPasswordRequest ResetPassword(int userId)
         {
-            var user = UnitOfWork.Users.GetById(userId);
-
             var request = new ResetPasswordRequestEntity()
                 {
                     CreatedOn = DateTime.UtcNow,
                     Token = Guid.NewGuid(),
-                    User = user
+                    UserId = userId
                 };
 
             UnitOfWork.ResetPasswordRequests.Add(request).ToModel();
@@ -175,7 +163,7 @@ namespace Photography.Data.Bolts
 
         public ResetPasswordRequest GetPasswordResetRequest(int userId, Guid token)
         {
-            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId, new[] {"User"});
+            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId);
             if (request == null)
             {
                 throw new DataException(string.Format("Could not find password reset request with token {0}.", token));
