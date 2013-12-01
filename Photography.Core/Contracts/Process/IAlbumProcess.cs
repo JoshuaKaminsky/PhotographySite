@@ -7,16 +7,18 @@ namespace Photography.Core.Contracts.Process
     {
         IEnumerable<Album> GetAlbums();
 
+        Album GetAlbumById(int albumId);
+
         IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria);
         
         Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags);
 
-        Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags);
+        Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags);
 
-        Album UpdateAlbumCover(int id, int albumCoverId);
+        Album UpdateAlbumCover(int albumId, int albumCoverId);
 
-        Album UpdateAlbumCategory(int id, int categoryId);
+        Album UpdateAlbumCategory(int albumId, int categoryId);
 
-        bool DeleteAlbum(int id);
+        bool DeleteAlbum(int albumId);
     }
 }

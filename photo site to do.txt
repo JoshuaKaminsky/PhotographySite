@@ -36,3 +36,10 @@ toModel = translating entity to a core model
 - Think about using: Single page application frameworks - Angular, Ember, etc to load all the views on one page as divs and make the UI faster
 - Knockout - does data binding on the front side, like deletes things from lists automatically for you etc
 - Seeder - quick way to generate test data, on the VS side it will create data based off your classes and insert into the db
+
+12/1:
+- we need to get a merge tool
+- service is between the controller and the process, it interacts with our database or other databases, our process just wraps our database and only returns database objects. 
+- the controller calls the service, the service is in control and handles all the requests and everything that needs done, it knows everything going on and what needs to happen. it calls the process and the process is dumb and only connects to our db and only knows how to get data basically, it returns data to the service, which could call an other process or do whatever other processing needs done, and returns the end result back to the controller which returns the appropriate view. 
+- Photography.Core > Contracts contains the Process & Service. The Process methods are in Photography.Data > Bolts. The Service methods are in Photography.Service > Bolts.
+- FontAwesome for icons and stuff

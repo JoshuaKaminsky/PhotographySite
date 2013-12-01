@@ -22,6 +22,12 @@ namespace Photography.Data.Bolts
             return albums.Select(x => x.ToModel());
         }
 
+        public Album GetAlbumById(int albumId)
+        {
+            var album = UnitOfWork.Albums.GetById(albumId);
+            return album.ToModel();
+        }
+
         public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)
         {
             var startsWith = UnitOfWork.Albums.GetAll(x => x.Name.StartsWith(searchCriteria.NameFilter, true, null));
@@ -50,29 +56,31 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        public Album UpdateAlbum(int id, string name, string description, bool isPublic, IEnumerable<Tag> tags)
+        public Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
-            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            var oldAlbum = UnitOfWork.Albums.GetById(albumId);
             if (oldAlbum == null)
                 throw new DataException("Album could not be retrieved.");
 
-            var newAlbum = new AlbumEntity
+            if (tags == null)
             {
-                Name = name,
-                Description = description,
-                IsPublic = isPublic,
-                Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList()
-            };
+                tags = new Tag[]{};
+            }
 
-            newAlbum = UnitOfWork.Albums.Update(newAlbum);
+            oldAlbum.Name = name;
+            oldAlbum.Description = description;
+            oldAlbum.IsPublic = isPublic;
+            oldAlbum.Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList();
+
+            oldAlbum = UnitOfWork.Albums.Update(oldAlbum);
             UnitOfWork.Commit();
 
-            return newAlbum.ToModel();
+            return oldAlbum.ToModel();
         }
 
-        public Album UpdateAlbumCover(int id, int albumCoverId)
+        public Album UpdateAlbumCover(int albumId, int albumCoverId)
         {
-            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            var oldAlbum = UnitOfWork.Albums.GetById(albumId);
             if (oldAlbum == null)
                 throw new DataException("Album could not be retrieved.");
 
@@ -87,9 +95,9 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        public Album UpdateAlbumCategory(int id, int categoryId)
+        public Album UpdateAlbumCategory(int albumId, int categoryId)
         {
-            var oldAlbum = UnitOfWork.Albums.GetById(id);
+            var oldAlbum = UnitOfWork.Albums.GetById(albumId);
             if (oldAlbum == null)
                 throw new DataException("Album could not be retrieved.");
 
@@ -104,9 +112,9 @@ namespace Photography.Data.Bolts
             return newAlbum.ToModel();
         }
 
-        public bool DeleteAlbum(int id)
+        public bool DeleteAlbum(int albumId)
         {
-            return UnitOfWork.Albums.GetById(id) == null || UnitOfWork.Albums.Delete(id);
+            return UnitOfWork.Albums.GetById(albumId) == null || UnitOfWork.Albums.Delete(albumId);
         }
     }
 }

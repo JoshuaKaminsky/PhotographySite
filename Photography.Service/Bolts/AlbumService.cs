@@ -19,37 +19,37 @@ namespace Photography.Service.Bolts
 
         public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)
         {
-            throw new System.NotImplementedException();
+            return Process.SearchAlbums(searchCriteria);
         }
 
         public Album GetAlbum(int albumId)
         {
-            throw new System.NotImplementedException();
+            return Process.GetAlbumById(albumId);
         }
 
         public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
-            throw new System.NotImplementedException();
+            return Process.CreateAlbum(name, description, isPublic, tags);
         }
 
         public Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags)
         {
-            throw new System.NotImplementedException();
+            return Process.UpdateAlbum(albumId, name, description, isPublic, tags);
         }
 
         public Album UpdateAlbumCover(int albumId, int albumCoverId)
         {
-            throw new System.NotImplementedException();
+            return Process.UpdateAlbumCover(albumId, albumCoverId);
         }
 
         public Album UpdateAlbumCategory(int albumId, int categoryId)
         {
-            throw new System.NotImplementedException();
+            return Process.UpdateAlbumCategory(albumId, categoryId);
         }
 
         public bool DeleteAlbum(int albumId)
         {
-            throw new System.NotImplementedException();
+            return Process.DeleteAlbum(albumId);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Photography.Data.Entities
         public virtual PhotoEntity AlbumCover { get; set; }
        
         [Required]
-        public int AlbumCoverId { get; set; }
+        public int? AlbumCoverId { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual CategoryEntity Category { get; set; }
