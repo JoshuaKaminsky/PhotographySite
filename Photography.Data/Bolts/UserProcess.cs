@@ -163,7 +163,7 @@ namespace Photography.Data.Bolts
 
         public ResetPasswordRequest GetPasswordResetRequest(int userId, Guid token)
         {
-            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId);
+            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId, new[] { "User" });
             if (request == null)
             {
                 throw new DataException(string.Format("Could not find password reset request with token {0}.", token));
