@@ -1,4 +1,4 @@
-@model Photography.Core.Models.User
+@model PhotographySite.Models.UserModel
 
 @{
     ViewBag.Title = "Edit User";
@@ -10,7 +10,7 @@
     <fieldset>
         <legend>User</legend>
         
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.User.Id)
 		@Html.Partial("_CreateOrEdit", Model)
         
         <a href="@Url.Action("Index")" class="btn btn-info pull-left">Back</a>

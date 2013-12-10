@@ -13,7 +13,9 @@ namespace Photography.Core.Contracts.Process
 
         Role CreateRole(string name);
 
-        User AddUserToRole(int userId, int roleId);
+        bool AddUserToRole(int userId, int roleId);
+
+        bool RemoveUserFromRole(int userId, int roleId);
 
         bool IsInRole(int userId, string roleName);
     }

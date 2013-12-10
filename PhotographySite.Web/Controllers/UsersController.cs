@@ -1,7 +1,8 @@
+using System.Linq;
 using System.Web.Mvc;
 using Photography.Core.Contracts.Service;
-using Photography.Core.Models;
 using PhotographySite.Authorization;
+using PhotographySite.Models;
 
 namespace PhotographySite.Controllers
 {
@@ -9,10 +10,12 @@ namespace PhotographySite.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IRoleService roleService)
         {
             _userService = userService;
+            _roleService = roleService;
         }
 
         public ViewResult Index()
@@ -22,37 +25,47 @@ namespace PhotographySite.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var roles = _roleService.GetRoles();
+
+            return View(new UserModel {AvailableRoles = roles.ToList()});
         } 
 
         [HttpPost]
-        public ActionResult Create(User user)
+        public ActionResult Create(UserModel model)
         {
             if (ModelState.IsValid)
             {
-                _userService.CreateUser(user.Name, user.EmailAddress, user.Discount);
-                
+                var user = _userService.CreateUser(model.User.Name, model.User.EmailAddress, model.User.Discount);
+
+                _roleService.UpdateUserRoles(user.Id, model.UserRoleIds);
+
                 return RedirectToAction("Index");  
             }
 
-            return View(user);
+            return View(model);
         }
         
         public ActionResult Edit(int id)
         {
-            return View(_userService.GetUser(id));
+            var user = _userService.GetUser(id);
+            var userRoles = _roleService.GetUserRoles(user.Id).Select(role => role.Id).ToList();
+            var roles = _roleService.GetRoles().ToList();
+
+            return View(new UserModel {User = user, UserRoleIds = userRoles, AvailableRoles = roles});
         }
 
         [HttpPost]
-        public ActionResult Edit(User user)
+        public ActionResult Edit(UserModel model)
         {
             if (ModelState.IsValid)
             {
-                _userService.UpdateUser(user);
+                var user = _userService.UpdateUser(model.User);
+
+                _roleService.UpdateUserRoles(user.Id, model.UserRoleIds);
 
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(model);
         }
 
         [HttpPost]

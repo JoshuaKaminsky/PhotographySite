@@ -170,7 +170,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\UpdatePasswordModel.cs" />
-    <Compile Include="Models\CreateUserModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
@@ -306,8 +306,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordInvalid.cshtml" />
     <Content Include="Views\Account\UpdatePassword.cshtml" />
-    <Content Include="Views\Users\_ModalDeleteUser.cshtml" />
-    <Content Include="Views\Users\_ModalResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,7 @@
-@model Photography.Core.Models.User
+@model PhotographySite.Models.UserModel
 
 @{
-    ViewBag.Title = "Create Usser";
+    ViewBag.Title = "Create User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,7 @@
     <fieldset>
         <legend>User</legend>
 
-		@Html.Partial("_CreateOrEdit", Model ?? new Photography.Core.Models.User())
+		@Html.Partial("_CreateOrEdit", Model)
         
         <a href="@Url.Action("Index")" class="btn btn-info pull-left">Back</a>
 

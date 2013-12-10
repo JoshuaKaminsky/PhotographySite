@@ -1,28 +1,37 @@
-@model Photography.Core.Models.User
+@model PhotographySite.Models.UserModel
 
 <div class="form-group">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-fw fa-user" data-tooltip="true" title="name"></i></span>
-        <input name="Name" type="text" class="form-control" placeholder="name..." required value="@Model.Name">
+        <input name="User.Name" type="text" class="form-control" placeholder="name..." required value="@Model.User.Name">
     </div>
 </div>
 
 <div class="form-group">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-fw fa-envelope-o" data-tooltip="true" title="email"></i></span>
-        <input name="EmailAddress" type="email" class="form-control" placeholder="email..." required value="@Model.EmailAddress">
+        <input name="User.EmailAddress" type="email" class="form-control" placeholder="email..." required value="@Model.User.EmailAddress">
     </div>
 </div>
 
 <div class="form-group">
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-fw fa-asterisk" data-tooltip="true" title="discount"></i></span>
-        <input name="Discount" type="number" class="form-control" placeholder="discount..." value="@Model.Discount" min="0" max="1" step=".05" autocomplete="none">
+        <input name="User.Discount" type="number" class="form-control" placeholder="discount..." value="@Model.User.Discount" min="0" max="1" step=".05" autocomplete="none">
     </div>
 </div>
 
 <div class="form-group">
     <div class="input-group">
-        <label> @Html.CheckBoxFor(model => model.IsActive) Enabled</label>
+        <label> @Html.CheckBoxFor(model => model.User.IsActive) Enabled</label>
     </div>
+</div>
+
+<legend>Roles</legend>
+
+<div class="form-group">
+    @foreach (var role in Model.AvailableRoles)
+    {
+        <label ><input type="checkbox" name="UserRoleIds" checked="@Model.UserRoleIds.Contains(role.Id)" value="@role.Id" /> @role.Name </label> <br/>
+    }
 </div>

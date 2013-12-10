@@ -29,11 +29,11 @@ namespace Photography.Core.Contracts.Service
         Role CreateRole(string roleName);
 
         /// <summary>
-        /// Add a user to a role
+        /// Update a user's roles
         /// </summary>
         /// <param name="userId">The id of the user</param>
-        /// <param name="roleId">The id of the role</param>
-        /// <returns>The user with roles collection populated</returns>
-        User AddUserToRole(int userId, int roleId);
+        /// <param name="roleIds">List of role ids the user is in</param>
+        /// <returns>True if successful</returns>
+        bool UpdateUserRoles(int userId, List<int> roleIds);
     }
 }

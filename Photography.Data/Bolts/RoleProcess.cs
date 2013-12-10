@@ -63,17 +63,28 @@ namespace Photography.Data.Bolts
             return roleEntity.ToModel();
         }
 
-        public User AddUserToRole(int userId, int roleId)
+        public bool AddUserToRole(int userId, int roleId)
         {
-            var roleEntity = UnitOfWork.Roles.GetById(roleId);
-            var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, new[] { "Roles" });
+            var user = UnitOfWork.Users.GetById(userId);
+            user.Roles.Add(new RoleEntity {Id = roleId});
 
-            userEntity.Roles.Add(roleEntity);
+            UnitOfWork.Users.Update(user);
 
-            UnitOfWork.Users.Update(userEntity);
             UnitOfWork.Commit();
 
-            return userEntity.ToModel();
+            return true;
+        }
+
+        public bool RemoveUserFromRole(int userId, int roleId)
+        {
+            var user = UnitOfWork.Users.GetById(userId);
+            user.Roles.Remove(new RoleEntity { Id = roleId });
+
+            UnitOfWork.Users.Update(user);
+
+            UnitOfWork.Commit();
+
+            return true;
         }
 
         public bool IsInRole(int userId, string roleName)
