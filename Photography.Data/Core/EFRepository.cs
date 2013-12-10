@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
@@ -27,7 +29,7 @@ namespace Photography.Data.Core
             return DbSet;
         }
 
-        public System.Collections.Generic.IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null)
         {
             return GetItems(filter, includes);
         }
@@ -60,7 +62,7 @@ namespace Photography.Data.Core
         public virtual T Update(T entity)
         {
             var dbEntityEntry = DbContext.Entry(entity);
-            if (dbEntityEntry.State != EntityState.Modified && dbEntityEntry.State != EntityState.Detached)
+            if (dbEntityEntry.State != EntityState.Detached)
             {
                 dbEntityEntry.State = EntityState.Modified;
             }
@@ -78,10 +80,16 @@ namespace Photography.Data.Core
             return entity;
         }
 
+        public virtual bool Delete(int id)
+        {
+            var entity = GetById(id);
+            return entity == null || Delete(entity);
+        }
+
         public virtual bool Delete(T entity)
         {
             var dbEntityEntry = DbContext.Entry(entity);
-            if (dbEntityEntry.State != EntityState.Deleted)
+            if (dbEntityEntry.State != EntityState.Detached)
             {
                 dbEntityEntry.State = EntityState.Deleted;
             }
@@ -94,18 +102,12 @@ namespace Photography.Data.Core
             return true;
         }
 
-        public virtual bool Delete(int id)
-        {
-            var entity = GetById(id);
-            return entity == null || Delete(entity);
-        }
-
         public T Get(Func<T, bool> filter)
         {
             return DbSet.SingleOrDefault(filter);
         }
 
-        private IQueryable<T> GetItems(Expression<Func<T, bool>> filter, string[] includes = null)
+        private IQueryable<T> GetItems(Expression<Func<T, bool>> filter, ICollection<string> includes = null)
         {
             IQueryable<T> query = DbSet;
 
@@ -114,12 +116,20 @@ namespace Photography.Data.Core
                 query = query.Where(filter);
             }
 
-            if (includes != null && includes.Length > 0)
+            if (includes != null && includes.Count > 0)
             {
                 query = includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
             }
 
             return query;
+        }
+
+        private IEnumerable<Type> GetNavigationProperties<TEntity>()
+        {
+           return typeof (TEntity).GetProperties()
+                .Where(type => type.PropertyType == typeof(ICollection))
+                .Select(type => type.PropertyType)
+                .ToList();
         }
     }
 }
