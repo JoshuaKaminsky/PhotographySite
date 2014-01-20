@@ -2,6 +2,7 @@
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using Photography.Core.Contracts.Process;
@@ -25,7 +26,7 @@ namespace Photography.Data.Bolts
 
         public bool ValidateUser(string emailAddress, string password)
         {
-            var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), new[] { "Roles" });
+            var user = UnitOfWork.Users.Get(u => u.EmailAddress.Equals(emailAddress), u => u.Roles);
             if (user == null)
                 throw new AuthenticationException("Invalid Username.");
 
@@ -37,7 +38,7 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<User> GetUsers()
         {
-            return UnitOfWork.Users.GetAll().ToList().Select(user => user.ToModel());
+            return UnitOfWork.Users.GetAllQueryable().ToList().Select(user => user.ToModel());
         }
 
         public User GetUserById(int userId)
@@ -163,7 +164,7 @@ namespace Photography.Data.Bolts
 
         public ResetPasswordRequest GetPasswordResetRequest(int userId, Guid token)
         {
-            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId, new[] { "User" });
+            var request = UnitOfWork.ResetPasswordRequests.Get(r => r.Token == token && r.UserId == userId, r => r.User);
             if (request == null)
             {
                 throw new DataException(string.Format("Could not find password reset request with token {0}.", token));

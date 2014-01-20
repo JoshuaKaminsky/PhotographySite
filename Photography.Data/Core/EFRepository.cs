@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
 
@@ -24,19 +25,19 @@ namespace Photography.Data.Core
 
         protected DbSet<T> DbSet { get; set; }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAllQueryable()
         {
             return DbSet;
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
         {
-            return GetItems(filter, includes);
+            return GetItems(filter, (includes != null) ? includes.Select(GetPropertyName).ToList() : null);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string[] includes = null)
+        public T Get(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
         {
-            return GetItems(filter, includes).SingleOrDefault();
+            return GetItems(filter,  (includes != null) ? includes.Select(GetPropertyName).ToList() : null).SingleOrDefault();
         }
 
         public virtual T GetById(int id)
@@ -102,11 +103,6 @@ namespace Photography.Data.Core
             return true;
         }
 
-        public T Get(Func<T, bool> filter)
-        {
-            return DbSet.SingleOrDefault(filter);
-        }
-
         private IQueryable<T> GetItems(Expression<Func<T, bool>> filter, ICollection<string> includes = null)
         {
             IQueryable<T> query = DbSet;
@@ -124,7 +120,13 @@ namespace Photography.Data.Core
             return query;
         }
 
-        private IEnumerable<Type> GetNavigationProperties<TEntity>()
+        private static string GetPropertyName(Expression<Func<T, object>> propertyExpression)
+        {
+            var expression = (MemberExpression)((UnaryExpression)propertyExpression.Body).Operand;
+            return expression.Member.Name;
+        }
+
+        private static IEnumerable<Type> GetNavigationProperties<TEntity>()
         {
            return typeof (TEntity).GetProperties()
                 .Where(type => type.PropertyType == typeof(ICollection))

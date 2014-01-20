@@ -26,7 +26,7 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Tag> GetTags()
         {
-            return UnitOfWork.Tags.GetAll().Select(tag => tag.ToModel());
+            return UnitOfWork.Tags.GetAllQueryable().Select(tag => tag.ToModel());
         }
 
         public Tag GetTag(int tagId)

@@ -8,11 +8,11 @@ namespace Photography.Data.Contracts
 {
     internal interface IRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAll();
+        IQueryable<T> GetAllQueryable();
 
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter, string[] includes = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
 
-        T Get(Expression<Func<T, bool>> filter, string[] includes = null);
+        T Get(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes);
 
         T GetById(int id);
 
@@ -23,7 +23,5 @@ namespace Photography.Data.Contracts
         bool Delete(T entity);
 
         bool Delete(int id);
-
-        T Get(Func<T, bool> func);
     }
 }

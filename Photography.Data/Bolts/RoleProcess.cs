@@ -24,14 +24,14 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Role> GetRoles()
         {
-            return UnitOfWork.Roles.GetAll().ToList().Select(role => role.ToModel());
+            return UnitOfWork.Roles.GetAllQueryable().ToList().Select(role => role.ToModel());
         }
 
         public IEnumerable<Role> GetUserRoles(int userId)
         {
             try
             {
-                var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, new[] { "Roles" });
+                var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, user => user.Roles);
                 if (userEntity == null)
                     throw new Exception(string.Format("Could not find user with {0}.", userId));
 
@@ -95,7 +95,7 @@ namespace Photography.Data.Bolts
         {
             try
             {
-                var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, new [] { "Roles" });
+                var userEntity = UnitOfWork.Users.Get(user => user.Id == userId, user => user.Roles);
                 if (userEntity == null)
                     throw new Exception(string.Format("Could not find user with {0}.", userId));
 
