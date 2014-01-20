@@ -66,7 +66,9 @@ namespace Photography.Data.Bolts
         public bool AddUserToRole(int userId, int roleId)
         {
             var user = UnitOfWork.Users.GetById(userId);
-            user.Roles.Add(new RoleEntity {Id = roleId});
+            var role = UnitOfWork.Roles.GetById(roleId);
+
+            user.Roles.Add(role);
 
             UnitOfWork.Users.Update(user);
 
@@ -78,7 +80,9 @@ namespace Photography.Data.Bolts
         public bool RemoveUserFromRole(int userId, int roleId)
         {
             var user = UnitOfWork.Users.GetById(userId);
-            user.Roles.Remove(new RoleEntity { Id = roleId });
+            var role = UnitOfWork.Roles.GetById(roleId);
+
+            user.Roles.Remove(role);
 
             UnitOfWork.Users.Update(user);
 

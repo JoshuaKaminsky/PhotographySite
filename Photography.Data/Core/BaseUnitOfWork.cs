@@ -70,7 +70,6 @@ namespace Photography.Data.Core
             _dbContext.Configuration.ProxyCreationEnabled = false;
             _dbContext.Configuration.LazyLoadingEnabled = false;
             _dbContext.Configuration.ValidateOnSaveEnabled = false;
-            _dbContext.Configuration.AutoDetectChangesEnabled = false;
         }
 
         private IRepository<T> GetStandardRepo<T>() where T : BaseEntity
