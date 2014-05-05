@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Photography.Core.Models;
 using Photography.Data.Entities;
-using System.Linq;
 
 namespace Photography.Data.Extensions
 {

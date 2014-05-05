@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Photography.Data.Contracts;
 using Photography.Data.Entities;
+using System.Data;
 
 namespace Photography.Data.Core
 {
@@ -39,7 +40,7 @@ namespace Photography.Data.Core
         {
             return GetItems(filter,  (includes != null) ? includes.Select(GetPropertyName).ToList() : null).SingleOrDefault();
         }
-
+        
         public virtual T GetById(int id)
         {
             return DbSet.FirstOrDefault(item => item.Id == id);
@@ -122,7 +123,13 @@ namespace Photography.Data.Core
 
         private static string GetPropertyName(Expression<Func<T, object>> propertyExpression)
         {
-            var expression = (MemberExpression)((UnaryExpression)propertyExpression.Body).Operand;
+            var expression = propertyExpression.Body as MemberExpression;
+
+            if (expression == null)
+            {
+                throw new DataException("Could not access property with expression " + propertyExpression.ToString());
+            }
+
             return expression.Member.Name;
         }
 
