@@ -1,4 +1,4 @@
-@model Photography.Core.Models.Album
+@model PhotographySite.Models.AlbumModel
 
 @{
     ViewBag.Title = "Edit";
@@ -11,7 +11,7 @@
     <fieldset>
         <legend>Album</legend>
 
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Album.Id)
 		@Html.Partial("_CreateOrEdit", Model)
 
         <p>

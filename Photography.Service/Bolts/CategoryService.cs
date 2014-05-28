@@ -24,5 +24,16 @@ namespace Photography.Service.Bolts
         {
             return Process.GetCategoryById(categoryId);
         }
+
+
+        public Core.Models.Category CreateCategory(string name)
+        {
+            return Process.AddCategory(name);
+        }
+
+        public bool DeleteCategory(int categoryId)
+        {
+            return Process.DeleteCategory(categoryId);
+        }
     }
 }

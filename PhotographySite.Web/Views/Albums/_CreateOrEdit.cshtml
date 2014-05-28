@@ -3,37 +3,37 @@
 @* This partial view defines form fields that will appear when creating and editing entities *@
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.Name)
+    @Html.LabelFor(model => model.Album.Name)
 </div>
 <div class="editor-field">
-    @Html.EditorFor(model => model.Name)
-    @Html.ValidationMessageFor(model => model.Name)
+    @Html.EditorFor(model => model.Album.Name)
+    @Html.ValidationMessageFor(model => model.Album.Name)
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.Description)
+    @Html.LabelFor(model => model.Album.Description)
 </div>
 <div class="editor-field">
-    @Html.EditorFor(model => model.Description)
-    @Html.ValidationMessageFor(model => model.Description)
+    @Html.EditorFor(model => model.Album.Description)
+    @Html.ValidationMessageFor(model => model.Album.Description)
 </div>
 
 <div class="editor-label">
-    @Html.LabelFor(model => model.IsPublic)
+    @Html.LabelFor(model => model.Album.IsPublic)
 </div>
 <div class="editor-field">
-    @Html.EditorFor(model => model.IsPublic)
-    @Html.ValidationMessageFor(model => model.IsPublic)
+    @Html.EditorFor(model => model.Album.IsPublic)
+    @Html.ValidationMessageFor(model => model.Album.IsPublic)
 </div>
 @if (Model != null)
 {
     <div class="editor-label">
-        @Html.LabelFor(model => model.CreatedOn)
+        @Html.LabelFor(model => model.Album.CreatedOn)
     </div>
     <div class="editor-field">
-        @Html.EditorFor(model => model.CreatedOn, new { disabled = "disabled" })
+        @Html.EditorFor(model => model.Album.CreatedOn, new { disabled = "disabled" })
     </div>
 }
 <div class="editor-field">
-   @Html.DropDownListFor(model => model.Category, new SelectList(Model.AvailableCategories));
+   @Html.DropDownListFor(model => model.SelectedCategoryId, new SelectList(Model.AvailableCategories, "Id", "Name", Model.SelectedCategoryId.HasValue ? Model.SelectedCategoryId.Value : null));
 </div>

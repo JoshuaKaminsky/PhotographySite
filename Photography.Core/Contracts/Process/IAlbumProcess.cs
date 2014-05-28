@@ -11,7 +11,7 @@ namespace Photography.Core.Contracts.Process
 
         IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria);
         
-        Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags);
+        Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags, int categoryId);
 
         Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags);
 

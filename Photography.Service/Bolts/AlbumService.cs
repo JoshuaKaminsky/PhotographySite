@@ -27,9 +27,9 @@ namespace Photography.Service.Bolts
             return Process.GetAlbumById(albumId);
         }
 
-        public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags)
+        public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags, int categoryId)
         {
-            return Process.CreateAlbum(name, description, isPublic, tags);
+            return Process.CreateAlbum(name, description, isPublic, tags, categoryId);
         }
 
         public Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags)

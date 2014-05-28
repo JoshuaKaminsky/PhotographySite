@@ -11,7 +11,7 @@ namespace Photography.Core.Contracts.Service
         
         Album GetAlbum(int albumId);
 
-        Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags);
+        Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags, int categoryId);
 
         Album UpdateAlbum(int albumId, string name, string description, bool isPublic, IEnumerable<Tag> tags);
 

@@ -20,13 +20,29 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Category> GetCategories()
         {
-            return UnitOfWork.Categories.GetAll().ToList().Select(category => category.ToModel());
+            return UnitOfWork.Categories.GetAll().Select(category => category.ToModel());
         }
 
         public Category GetCategoryById(int categoryId)
         {
             var category = UnitOfWork.Categories.GetById(categoryId);
             return category.ToModel();
+        }
+
+        public Category AddCategory(string name)
+        {
+            var category = UnitOfWork.Categories.Get(c => c.Name.ToLower().Equals(name.ToLower()));
+            if (category != null)
+            {
+                return category.ToModel();
+            }
+
+            return UnitOfWork.Categories.Add(new CategoryEntity { Name = name }).ToModel();
+        }
+
+        public bool DeleteCategory(int categoryId)
+        {
+            return UnitOfWork.Categories.Delete(categoryId);
         }
     }
 }

@@ -19,13 +19,12 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Album> GetAlbums()
         {
-            return UnitOfWork.Albums.GetAll(null, album => album.Category).ToList().Select(x => x.ToModel());
+            return UnitOfWork.Albums.GetAll(null, album => album.Category).Select(x => x.ToModel());
         }
 
         public Album GetAlbumById(int albumId)
         {
-            var album = UnitOfWork.Albums.GetById(albumId);
-            return album.ToModel();
+            return UnitOfWork.Albums.Get(album => album.Id == albumId, album => album.Category).ToModel();
         }
 
         public IEnumerable<Album> SearchAlbums(AlbumSearchCriteria searchCriteria)
@@ -36,7 +35,7 @@ namespace Photography.Data.Bolts
             return startsWith.Union(contains, new EntityComparer<AlbumEntity>()).Select(album => album.ToModel());
         }
 
-        public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags)
+        public Album CreateAlbum(string name, string description, bool isPublic, IEnumerable<Tag> tags, int categoryId)
         {
             var oldAlbum = UnitOfWork.Albums.Get(album => album.Name.Equals(name));
             if (oldAlbum != null)
@@ -49,14 +48,16 @@ namespace Photography.Data.Bolts
             
             var newAlbum = new AlbumEntity
             {
-                Name = name,
+                CategoryId = categoryId,
+                CreatedOn = DateTime.UtcNow,
                 Description = description,
                 IsPublic = isPublic,
+                Name = name,
                 Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList(),
-                CreatedOn = DateTime.UtcNow
             };
 
             newAlbum = UnitOfWork.Albums.Add(newAlbum);
+            
             UnitOfWork.Commit();
 
             return newAlbum.ToModel();

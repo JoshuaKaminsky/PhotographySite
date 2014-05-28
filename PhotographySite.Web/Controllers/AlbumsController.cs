@@ -3,6 +3,7 @@ using Photography.Core.Models;
 using Photography.Core.Contracts.Service;
 using System.Linq;
 using PhotographySite.Models;
+using System;
 
 namespace PhotographySite.Controllers
 {   
@@ -39,23 +40,22 @@ namespace PhotographySite.Controllers
 
         public ActionResult Create()
         {
-            var categories = _categoryService.GetCategories();
-            return View(new AlbumModel { AvailableCategories = categories.ToList() });
+            return View(new AlbumModel { Album = new Album(), AvailableCategories = _categoryService.GetCategories().ToList() });
         } 
 
         //
         // POST: /Albums/Create
 
         [HttpPost]
-        public ActionResult Create(AlbumModel album)
+        public ActionResult Create(AlbumModel model)
         {
             if (ModelState.IsValid)
             {
-                _albumService.CreateAlbum(album.Name, album.Description, album.IsPublic, album.Tags);
+                _albumService.CreateAlbum(model.Album.Name, model.Album.Description, model.Album.IsPublic, model.Album.Tags, model.SelectedCategoryId.Value);
                 return RedirectToAction("Index");  
             }
 
-            return View(album);
+            return View(model);
         }
         
         //
@@ -63,22 +63,28 @@ namespace PhotographySite.Controllers
  
         public ActionResult Edit(int id)
         {
-            Album album = _albumService.GetAlbum(id);
-            return View(album);
+            var album = _albumService.GetAlbum(id);
+
+            return View(new AlbumModel
+            {
+                Album = album,
+                AvailableCategories = _categoryService.GetCategories().ToList(),
+                SelectedCategoryId = album.Category != null ? new Nullable<int>(album.Category.Id) : null
+            });
         }
 
         //
         // POST: /Albums/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Album album)
+        public ActionResult Edit(AlbumModel model)
         {
             if (ModelState.IsValid)
             {
-                _albumService.UpdateAlbum(album.Id, album.Name, album.Description, album.IsPublic, album.Tags);
+                _albumService.UpdateAlbum(model.Album.Id, model.Album.Name, model.Album.Description, model.Album.IsPublic, model.Album.Tags);
                 return RedirectToAction("Index");
             }
-            return View(album);
+            return View(model);
         }
 
         //

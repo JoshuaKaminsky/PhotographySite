@@ -12,5 +12,9 @@ namespace Photography.Core.Contracts.Process
         IEnumerable<Category> GetCategories();
 
         Category GetCategoryById(int categoryId);
+
+        Category AddCategory(string name);
+
+        bool DeleteCategory(int categoryId);
     }
 }
