@@ -19,12 +19,7 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Album> GetAlbums()
         {
-<<<<<<< HEAD
-            var albums = UnitOfWork.Albums.GetAllQueryable().ToList();
-=======
-            var albums = UnitOfWork.Albums.GetAll(null, new[] { "Category" }).ToList();
->>>>>>> whole bunch of stuff, mostly albums and categories
-            return albums.Select(x => x.ToModel());
+            return UnitOfWork.Albums.GetAll(null, album => album.Category).ToList().Select(x => x.ToModel());
         }
 
         public Album GetAlbumById(int albumId)
