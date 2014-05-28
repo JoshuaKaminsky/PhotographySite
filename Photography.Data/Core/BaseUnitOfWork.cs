@@ -51,6 +51,11 @@ namespace Photography.Data.Core
             get { return GetStandardRepo<AlbumEntity>(); }
         }
 
+        public IRepository<CategoryEntity> Categories
+        {
+            get { return GetStandardRepo<CategoryEntity>(); }
+        }
+
         public IRepository<PhotoEntity> Photos
         {
             get { return this.GetStandardRepo<PhotoEntity>(); }

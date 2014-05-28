@@ -1,4 +1,4 @@
-@model Photography.Core.Models.Album
+@model PhotographySite.Models.AlbumModel
 
 @* This partial view defines form fields that will appear when creating and editing entities *@
 
@@ -25,12 +25,15 @@
     @Html.EditorFor(model => model.IsPublic)
     @Html.ValidationMessageFor(model => model.IsPublic)
 </div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.CreatedOn)
-</div>
+@if (Model != null)
+{
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CreatedOn)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CreatedOn, new { disabled = "disabled" })
+    </div>
+}
 <div class="editor-field">
-    @Html.EditorFor(model => model.CreatedOn)
-    @Html.ValidationMessageFor(model => model.CreatedOn)
+   @Html.DropDownListFor(model => model.Category, new SelectList(Model.AvailableCategories));
 </div>
-

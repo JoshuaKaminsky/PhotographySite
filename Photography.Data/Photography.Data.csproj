@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Bolts\AlbumProcess.cs" />
     <Compile Include="Bolts\BaseProcess.cs" />
+    <Compile Include="Bolts\CategoryProcess.cs" />
     <Compile Include="Bolts\PhotoProcess.cs" />
     <Compile Include="Bolts\RoleProcess.cs" />
     <Compile Include="Bolts\SessionProcess.cs" />

@@ -9,6 +9,7 @@ namespace Photography.Service.Bootstrap
         public override void Load()
         {
             Bind<IAlbumService>().To<AlbumService>();
+            Bind<ICategoryService>().To<CategoryService>();
             Bind<IPhotoService>().To<PhotoService>();
             Bind<ITagService>().To<TagService>();
 

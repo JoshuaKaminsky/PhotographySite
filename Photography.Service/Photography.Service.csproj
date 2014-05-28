@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Bolts\AlbumService.cs" />
     <Compile Include="Bolts\BaseService.cs" />
+    <Compile Include="Bolts\CategoryService.cs" />
     <Compile Include="Bolts\FileSystemMailSender.cs" />
     <Compile Include="Bolts\MailService.cs" />
     <Compile Include="Bolts\PhotoService.cs" />

@@ -11,6 +11,7 @@ namespace Photography.Data.Bootstrap
         public override void Load()
         {
             Bind<IAlbumProcess>().To<AlbumProcess>();
+            Bind<ICategoryProcess>().To<CategoryProcess>();
             Bind<IPhotoProcess>().To<PhotoProcess>();
             Bind<ITagProcess>().To<TagProcess>();
 

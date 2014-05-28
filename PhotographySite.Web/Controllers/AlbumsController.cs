@@ -1,16 +1,20 @@
 using System.Web.Mvc;
 using Photography.Core.Models;
 using Photography.Core.Contracts.Service;
+using System.Linq;
+using PhotographySite.Models;
 
 namespace PhotographySite.Controllers
 {   
     public class AlbumsController : Controller
     {
         private readonly IAlbumService _albumService;
+        private readonly ICategoryService _categoryService;
         
-        public AlbumsController(IAlbumService albumService)
+        public AlbumsController(IAlbumService albumService, ICategoryService categoryService)
         {
             this._albumService = albumService;
+            this._categoryService = categoryService;
         }
 
         //
@@ -35,14 +39,15 @@ namespace PhotographySite.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var categories = _categoryService.GetCategories();
+            return View(new AlbumModel { AvailableCategories = categories.ToList() });
         } 
 
         //
         // POST: /Albums/Create
 
         [HttpPost]
-        public ActionResult Create(Album album)
+        public ActionResult Create(AlbumModel album)
         {
             if (ModelState.IsValid)
             {

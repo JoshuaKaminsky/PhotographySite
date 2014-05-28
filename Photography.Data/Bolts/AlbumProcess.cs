@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Photography.Data.Extensions;
+using System;
 
 namespace Photography.Data.Bolts
 {       
@@ -18,7 +19,11 @@ namespace Photography.Data.Bolts
 
         public IEnumerable<Album> GetAlbums()
         {
+<<<<<<< HEAD
             var albums = UnitOfWork.Albums.GetAllQueryable().ToList();
+=======
+            var albums = UnitOfWork.Albums.GetAll(null, new[] { "Category" }).ToList();
+>>>>>>> whole bunch of stuff, mostly albums and categories
             return albums.Select(x => x.ToModel());
         }
 
@@ -42,12 +47,18 @@ namespace Photography.Data.Bolts
             if (oldAlbum != null)
                 throw new DataException("Album name already exists.");
 
+            if (tags == null)
+            {
+                tags = new Tag[] { };
+            }
+            
             var newAlbum = new AlbumEntity
             {
                 Name = name,
                 Description = description,
                 IsPublic = isPublic,
-                Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList()
+                Tags = tags.Select(tag => new TagEntity { Id = tag.Id }).ToList(),
+                CreatedOn = DateTime.UtcNow
             };
 
             newAlbum = UnitOfWork.Albums.Add(newAlbum);

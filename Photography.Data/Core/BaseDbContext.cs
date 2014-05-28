@@ -13,6 +13,8 @@ namespace Photography.Data.Core
 
         public DbSet<AlbumEntity> Albums { get; set; }
 
+        public DbSet<CategoryEntity> Categories { get; set; }
+        
         public DbSet<PhotoEntity> Photos { get; set; }
 
         public DbSet<ResetPasswordRequestEntity> ResetPasswordRequests { get; set; }

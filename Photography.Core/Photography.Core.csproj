@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\Process\IAlbumProcess.cs" />
+    <Compile Include="Contracts\Process\ICategoryProcess.cs" />
     <Compile Include="Contracts\Process\IPhotoProcess.cs" />
     <Compile Include="Contracts\Process\IProcess.cs" />
     <Compile Include="Contracts\Process\IRoleProcess.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="Contracts\Process\ITagProcess.cs" />
     <Compile Include="Contracts\Process\IUserProcess.cs" />
     <Compile Include="Contracts\Service\IAlbumService.cs" />
+    <Compile Include="Contracts\Service\ICategoryService.cs" />
     <Compile Include="Contracts\Service\IConfiguration.cs" />
     <Compile Include="Contracts\Service\IMailService.cs" />
     <Compile Include="Contracts\Service\IPhotoService.cs" />

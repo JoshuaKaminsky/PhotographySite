@@ -43,3 +43,5 @@ toModel = translating entity to a core model
 - the controller calls the service, the service is in control and handles all the requests and everything that needs done, it knows everything going on and what needs to happen. it calls the process and the process is dumb and only connects to our db and only knows how to get data basically, it returns data to the service, which could call an other process or do whatever other processing needs done, and returns the end result back to the controller which returns the appropriate view. 
 - Photography.Core > Contracts contains the Process & Service. The Process methods are in Photography.Data > Bolts. The Service methods are in Photography.Service > Bolts.
 - FontAwesome for icons and stuff
+
+- BaseDbContext is for setting up the magic behind the scenes, and the repositories are what calls it and that's what we use

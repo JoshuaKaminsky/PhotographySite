@@ -11,6 +11,8 @@ namespace Photography.Data.Contracts
 
         IRepository<AlbumEntity> Albums { get; }
 
+        IRepository<CategoryEntity> Categories { get; }
+
         IRepository<PhotoEntity> Photos { get; }
         
         IRepository<ResetPasswordRequestEntity> ResetPasswordRequests { get; }
